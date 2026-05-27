@@ -36,6 +36,17 @@ The real product is developed in **`~/Documents/automated-payroll-system`** (sib
 - **Do not** put wireframe-only labels or mock banners inside `packages/ui` — keep those in `wireframe/`.
 - **Auth validation:** rules and schemas in `@aps/mock-data`; touched/blur/submit UX in wireframe auth views.
 
+## Layout and viewports
+
+| Layer                       | What responds                           | Breakpoints / widths                                     |
+| --------------------------- | --------------------------------------- | -------------------------------------------------------- |
+| Shell (`WireframeShell`)    | Sidebar vs bottom nav                   | Browser `@media (min-width: 768px)`                      |
+| Device preview frame        | Bezel width                             | 390 / 768 / 1280 px (`devicePreviewWidths`)              |
+| Module content inside frame | Auth card, UI kit grids, form density   | `@container wireframe-screen` in `responsive-layout.css` |
+| Auth card max width         | Intentional cap, not full-bleed desktop | `28rem` narrow, `32rem` at container ≥768px              |
+
+Device-preview tabbar state is stored in `sessionStorage` (`wireframe-viewport-preview`) for demos only. It does not replace production responsive behavior in the sibling app repo.
+
 ## Testing layout
 
 - E2E: Playwright against `wireframe/` (port 4570).

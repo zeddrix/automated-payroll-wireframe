@@ -29,3 +29,11 @@ These primitives can inform the production app in the sibling repo `~/Documents/
 ## UI Kit reference in wireframe app
 
 You can browse the integrated specimen catalog at `/ui-kit/tokens` in the wireframe app. It includes token swatches, component specimens, and navigation patterns.
+
+## Responsive behavior
+
+- **Auth forms** use a deliberate max width (`28rem`–`32rem`) so fields stay readable on large screens; they are not meant to stretch edge-to-edge on desktop.
+- **Typography and spacing** use CSS variables (`--text-body`, `--text-title`, `--space-page-x`) with `clamp()` where appropriate; fields also scale slightly with container inline size (`cqi`).
+- **Device preview** (mobile / tablet / desktop tabs in the wireframe shell) constrains the preview frame to 390px / 768px / 1280px and applies **container queries** on `wireframe-screen` so content inside the frame responds to the selected mode.
+- **Shell chrome** (sidebar vs bottom nav) follows the **browser viewport** at `768px` (`--bp-md`), not the device-preview tabbar. Preview mode is frame-only for navigation chrome.
+- Shared numbers live in `layout-tokens.ts` and `responsive-layout.css`; shell layout stays in `WireframeShell.svelte` with viewport `@media`.
