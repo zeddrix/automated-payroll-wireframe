@@ -1,7 +1,13 @@
 <script lang="ts">
-  import { validateSignUpForm } from '@aps/mock-data';
+  import { getSignUpFieldErrors, isSignUpSubmittable } from '@aps/mock-data';
   import { moduleTabPath, selectors } from '@aps/contracts';
-  import { AuthPageHeader, HiFiField, HiFiButton } from '@aps/ui';
+  import {
+    AuthPageHeader,
+    HiFiField,
+    HiFiButton,
+    PasswordRequirements,
+    PasswordMatchHint
+  } from '@aps/ui';
   import AuthHiFiShell from './AuthHiFiShell.svelte';
   import { demoLook } from '../../state/wireframe-demo-look.svelte';
 
@@ -10,11 +16,24 @@
   let password = $state('');
   let confirmPassword = $state('');
   let termsAccepted = $state(false);
-  let fieldError = $state<string | null>(null);
   let showSuccess = $state(false);
+  let submitted = $state(false);
+  let touched = $state({
+    name: false,
+    email: false,
+    password: false,
+    confirmPassword: false,
+    terms: false
+  });
 
+  const fieldErrors = $derived(
+    getSignUpFieldErrors(name, email, password, confirmPassword, termsAccepted, {
+      touched,
+      submitted
+    })
+  );
   const canSubmit = $derived(
-    validateSignUpForm(name, email, password, confirmPassword, termsAccepted) === null
+    isSignUpSubmittable(name, email, password, confirmPassword, termsAccepted)
   );
 
   const footerLinks = [
@@ -32,14 +51,14 @@
     demoLook.enabled ? 'I agree to the terms of service (demo)' : 'I agree to the terms of service'
   );
 
+  const requirementsId = selectors.authSignUpPasswordRequirements;
+
   function handleSubmit(event: Event) {
     event.preventDefault();
-    const validation = validateSignUpForm(name, email, password, confirmPassword, termsAccepted);
-    if (validation) {
-      fieldError = validation;
+    submitted = true;
+    if (!canSubmit) {
       return;
     }
-    fieldError = null;
     showSuccess = true;
   }
 </script>
@@ -62,48 +81,70 @@
       {/if}
     </div>
   {:else}
-    <form onsubmit={handleSubmit}>
+    <form onsubmit={handleSubmit} novalidate>
       <HiFiField
         id="signup-name"
         label="Full name"
         bind:value={name}
-        error={fieldError && !name.trim() ? fieldError : null}
+        error={fieldErrors.name ?? null}
         testId={selectors.authSignUpName}
+        onblur={() => {
+          touched = { ...touched, name: true };
+        }}
       />
       <HiFiField
         id="signup-email"
         label="Email"
         type="email"
         bind:value={email}
-        error={fieldError && name.trim() && !email.trim() ? fieldError : null}
+        error={fieldErrors.email ?? null}
         testId={selectors.authSignUpEmail}
+        onblur={() => {
+          touched = { ...touched, email: true };
+        }}
       />
       <HiFiField
         id="signup-password"
         label="Password"
         type="password"
         bind:value={password}
-        error={fieldError && email.trim() && !password ? fieldError : null}
+        error={fieldErrors.password ?? null}
         testId={selectors.authSignUpPassword}
+        hintId={requirementsId}
+        onblur={() => {
+          touched = { ...touched, password: true };
+        }}
+      />
+      <PasswordRequirements
+        {password}
+        testId={selectors.authSignUpPasswordRequirements}
+        requirementTestId={selectors.passwordRequirement}
       />
       <HiFiField
         id="signup-confirm"
         label="Confirm password"
         type="password"
         bind:value={confirmPassword}
-        error={fieldError && password && !confirmPassword ? fieldError : null}
+        error={fieldErrors.confirmPassword ?? null}
         testId={selectors.authSignUpConfirmPassword}
+        onblur={() => {
+          touched = { ...touched, confirmPassword: true };
+        }}
       />
-      <label class="terms">
+      <PasswordMatchHint {password} {confirmPassword} testId={selectors.authSignUpPasswordMatch} />
+      <label class="terms" class:terms--error={!!fieldErrors.termsAccepted}>
         <input
           type="checkbox"
           bind:checked={termsAccepted}
           data-testid={selectors.authSignUpTerms}
+          onchange={() => {
+            touched = { ...touched, terms: true };
+          }}
         />
         <span>{termsLabel}</span>
       </label>
-      {#if fieldError && name.trim() && email.trim() && password && confirmPassword}
-        <p class="form-error" role="alert">{fieldError}</p>
+      {#if fieldErrors.termsAccepted}
+        <p class="terms-error" role="alert">{fieldErrors.termsAccepted}</p>
       {/if}
       <HiFiButton type="submit" disabled={!canSubmit} testId={selectors.authSignUpSubmit}>
         Create account
@@ -122,14 +163,17 @@
     color: var(--auth-text, #0f172a);
     cursor: pointer;
   }
+  .terms--error {
+    color: var(--auth-danger, #dc2626);
+  }
   .terms input {
     margin-top: 0.2rem;
     width: 1rem;
     height: 1rem;
     accent-color: var(--auth-primary, #2563eb);
   }
-  .form-error {
-    margin: 0 0 0.75rem;
+  .terms-error {
+    margin: -0.5rem 0 1rem;
     font-size: 0.8125rem;
     color: var(--auth-danger, #dc2626);
   }

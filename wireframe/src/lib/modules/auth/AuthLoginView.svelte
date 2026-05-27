@@ -2,8 +2,9 @@
   import {
     MOCK_VALID_EMAIL,
     MOCK_VALID_PASSWORD,
-    validateLoginForm,
-    validateMockLogin
+    validateMockLogin,
+    getLoginFieldErrors,
+    isLoginSubmittable
   } from '@aps/mock-data';
   import { moduleTabPath, selectors } from '@aps/contracts';
   import { AuthPageHeader, HiFiField, HiFiButton, ErrorState } from '@aps/ui';
@@ -14,12 +15,12 @@
 
   let email = $state('');
   let password = $state('');
-  let fieldError = $state<string | null>(null);
   let submitError = $state<string | null>(null);
+  let submitted = $state(false);
+  let touched = $state({ email: false, password: false });
 
-  const canSubmit = $derived(
-    !!email.trim() && !!password && validateLoginForm(email, password) === null
-  );
+  const fieldErrors = $derived(getLoginFieldErrors(email, password, { touched, submitted }));
+  const canSubmit = $derived(isLoginSubmittable(email, password));
 
   const footerLinks = [
     {
@@ -46,13 +47,11 @@
 
   function handleSubmit(event: Event) {
     event.preventDefault();
+    submitted = true;
     submitError = null;
-    const validation = validateLoginForm(email, password);
-    if (validation) {
-      fieldError = validation;
+    if (!canSubmit) {
       return;
     }
-    fieldError = null;
     if (!validateMockLogin(email, password)) {
       submitError = invalidCredentialsMessage;
       return;
@@ -68,22 +67,28 @@
     subtitleTestId={selectors.authLoginSubtitle}
     sectionTitle="Credentials"
   />
-  <form onsubmit={handleSubmit}>
+  <form onsubmit={handleSubmit} novalidate>
     <HiFiField
       id="login-email"
       label="Email"
       type="email"
       bind:value={email}
-      error={fieldError && !email.trim() ? fieldError : null}
+      error={fieldErrors.email ?? null}
       testId={selectors.authLoginEmail}
+      onblur={() => {
+        touched = { ...touched, email: true };
+      }}
     />
     <HiFiField
       id="login-password"
       label="Password"
       type="password"
       bind:value={password}
-      error={fieldError && email.trim() && !password ? fieldError : null}
+      error={fieldErrors.password ?? null}
       testId={selectors.authLoginPassword}
+      onblur={() => {
+        touched = { ...touched, password: true };
+      }}
     />
     {#if submitError}
       <div class="submit-error" data-testid={selectors.authLoginError}>

@@ -1,15 +1,17 @@
 <script lang="ts">
-  import { validateForgotPasswordForm } from '@aps/mock-data';
+  import { getForgotPasswordFieldErrors, isForgotPasswordSubmittable } from '@aps/mock-data';
   import { moduleTabPath, selectors } from '@aps/contracts';
   import { AuthPageHeader, HiFiField, HiFiButton } from '@aps/ui';
   import AuthHiFiShell from './AuthHiFiShell.svelte';
   import { demoLook } from '../../state/wireframe-demo-look.svelte';
 
   let email = $state('');
-  let fieldError = $state<string | null>(null);
   let showSuccess = $state(false);
+  let submitted = $state(false);
+  let touched = $state({ email: false });
 
-  const canSubmit = $derived(validateForgotPasswordForm(email) === null);
+  const fieldErrors = $derived(getForgotPasswordFieldErrors(email, { touched, submitted }));
+  const canSubmit = $derived(isForgotPasswordSubmittable(email));
 
   const footerLinks = [
     {
@@ -27,12 +29,10 @@
 
   function handleSubmit(event: Event) {
     event.preventDefault();
-    const validation = validateForgotPasswordForm(email);
-    if (validation) {
-      fieldError = validation;
+    submitted = true;
+    if (!canSubmit) {
       return;
     }
-    fieldError = null;
     showSuccess = true;
   }
 </script>
@@ -56,14 +56,17 @@
       {/if}
     </div>
   {:else}
-    <form onsubmit={handleSubmit}>
+    <form onsubmit={handleSubmit} novalidate>
       <HiFiField
         id="forgot-email"
         label="Email"
         type="email"
         bind:value={email}
-        error={fieldError}
+        error={fieldErrors.email ?? null}
         testId={selectors.authForgotEmail}
+        onblur={() => {
+          touched = { ...touched, email: true };
+        }}
       />
       <HiFiButton type="submit" disabled={!canSubmit} testId={selectors.authForgotSubmit}>
         Send reset link
