@@ -1,14 +1,17 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { Snippet } from 'svelte';
+  import { goto } from '$app/navigation';
   import { BottomNav, SidebarRail, ModuleTabs, LowFiButton } from '@aps/ui';
   import { selectors, type ModuleId, type TabId } from '@aps/contracts';
   import { buildModuleNavItems, buildTabNavItems } from './nav-items';
   import { wireframeUiState } from '../state/wireframe-ui-state.svelte';
   import { viewportPreviewState } from '../state/viewport-preview.svelte';
   import { demoLook } from '../state/wireframe-demo-look.svelte';
+  import { uiKitLayout } from '../state/wireframe-ui-kit-layout.svelte';
   import WireframeDevicePreview from './WireframeDevicePreview.svelte';
   import DemoLookToggle from './DemoLookToggle.svelte';
+  import UiKitLayoutToggle from './UiKitLayoutToggle.svelte';
 
   interface Props {
     moduleId: ModuleId;
@@ -22,13 +25,34 @@
   onMount(() => {
     viewportPreviewState.init();
     demoLook.init();
+    uiKitLayout.init();
     clientReady = true;
   });
 
   const moduleNavItems = buildModuleNavItems();
   const tabNavItems = $derived(buildTabNavItems(moduleId, tabId));
   const isAuthModule = $derived(moduleId === 'auth');
+  const isUiKitModule = $derived(moduleId === 'ui-kit');
   const phaseLabel = $derived(isAuthModule ? 'Proposal / hi-fi auth' : 'Proposal / low-fi');
+
+  const uiKitTabNavItems = $derived(
+    isUiKitModule && uiKitLayout.mode === 'tabs'
+      ? tabNavItems.filter((t) => t.id !== 'catalog')
+      : tabNavItems
+  );
+
+  $effect(() => {
+    if (!clientReady) return;
+    if (!isUiKitModule) return;
+
+    if (uiKitLayout.mode === 'scroll' && tabId !== 'catalog') {
+      goto('/ui-kit/catalog');
+    }
+
+    if (uiKitLayout.mode === 'tabs' && tabId === 'catalog') {
+      goto('/ui-kit/tokens');
+    }
+  });
 </script>
 
 <div
@@ -73,13 +97,28 @@
         {#snippet between()}
           <div class="module-toolbar" data-testid={selectors.moduleToolbar}>
             <div class="module-toolbar__tabs">
-              <ModuleTabs
-                tabs={tabNavItems.map((t) => ({ id: t.id, label: t.label, href: t.href }))}
-                activeTabId={tabId}
-                variant={isAuthModule ? 'hifi' : 'lowfi'}
-              />
+              {#if isUiKitModule && uiKitLayout.mode === 'scroll'}
+                <UiKitLayoutToggle />
+              {:else if isUiKitModule && uiKitLayout.mode === 'tabs'}
+                <ModuleTabs
+                  tabs={uiKitTabNavItems.map((t) => ({ id: t.id, label: t.label, href: t.href }))}
+                  activeTabId={tabId}
+                  variant="lowfi"
+                />
+              {:else}
+                <ModuleTabs
+                  tabs={tabNavItems.map((t) => ({ id: t.id, label: t.label, href: t.href }))}
+                  activeTabId={tabId}
+                  variant={isAuthModule ? 'hifi' : 'lowfi'}
+                />
+              {/if}
             </div>
-            <DemoLookToggle />
+            <div class="module-toolbar__actions">
+              {#if isUiKitModule && uiKitLayout.mode === 'tabs'}
+                <UiKitLayoutToggle />
+              {/if}
+              <DemoLookToggle />
+            </div>
           </div>
         {/snippet}
         <div class="shell__content" data-testid={selectors.contentRegion}>
@@ -162,6 +201,11 @@
   .module-toolbar__tabs {
     flex: 1;
     min-width: 0;
+  }
+  .module-toolbar__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
   }
   .module-toolbar__tabs :global(.module-tabs) {
     padding-top: 0;
