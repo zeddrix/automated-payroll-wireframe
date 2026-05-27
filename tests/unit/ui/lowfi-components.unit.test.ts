@@ -12,8 +12,8 @@ describe('mock auth validation (used by LowFi forms)', () => {
     expect(validateLoginForm('not-an-email', 'password123')).toBe('Enter a valid email address');
   });
 
-  it('rejects short password', () => {
-    expect(validateLoginForm('a@b.com', '123')).toBe('Password must be at least 6 characters');
+  it('rejects empty password', () => {
+    expect(validateLoginForm('a@b.com', '')).toBe('Password is required');
   });
 
   it('accepts demo credentials for mock login', () => {

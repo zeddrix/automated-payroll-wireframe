@@ -2,7 +2,14 @@
  * @vitest-environment happy-dom
  */
 import { describe, expect, it } from 'vitest';
-import { hifiBlue, DevicePreviewFrame, DevicePreviewTabbar } from '@aps/ui';
+import { render } from '@testing-library/svelte';
+import {
+  hifiBlue,
+  DevicePreviewFrame,
+  DevicePreviewTabbar,
+  HiFiField,
+  PasswordRequirements
+} from '@aps/ui';
 import { resolveModuleView } from '../../../wireframe/src/lib/shell/module-view-registry';
 import PlaceholderView from '../../../wireframe/src/lib/modules/shared/PlaceholderView.svelte';
 
@@ -20,5 +27,48 @@ describe('HiFi auth and device preview wiring', () => {
       const { component } = resolveModuleView('auth', tabId);
       expect(component).not.toBe(PlaceholderView);
     }
+  });
+
+  it('HiFiField sets aria-invalid and aria-describedby when error is shown', () => {
+    const { getByTestId } = render(HiFiField, {
+      props: {
+        id: 'test-email',
+        label: 'Email',
+        testId: 'test-email-input',
+        error: 'Enter a valid email address'
+      }
+    });
+    const input = getByTestId('test-email-input');
+    expect(input.getAttribute('aria-invalid')).toBe('true');
+    expect(input.getAttribute('aria-describedby')).toBe('test-email-error');
+  });
+
+  it('HiFiField password toggle switches input type and preserves value', async () => {
+    const { getByTestId } = render(HiFiField, {
+      props: {
+        id: 'test-password',
+        label: 'Password',
+        type: 'password',
+        testId: 'test-password-input',
+        value: 'SecretPass1!'
+      }
+    });
+    const input = getByTestId('test-password-input') as HTMLInputElement;
+    const toggle = getByTestId('test-password-input-visibility-toggle');
+
+    expect(input.type).toBe('password');
+    await toggle.click();
+    expect(input.type).toBe('text');
+    expect(input.value).toBe('SecretPass1!');
+    await toggle.click();
+    expect(input.type).toBe('password');
+  });
+
+  it('PasswordRequirements lists policy rules when password is non-empty', () => {
+    const { getByTestId } = render(PasswordRequirements, {
+      props: { password: 'ab', testId: 'pw-reqs' }
+    });
+    expect(getByTestId('pw-reqs')).toBeTruthy();
+    expect(getByTestId('password-requirement-minLength').getAttribute('data-met')).toBe('false');
   });
 });

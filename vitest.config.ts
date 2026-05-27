@@ -14,7 +14,8 @@ export default defineConfig({
       '@aps/mock-data': path.resolve(__dirname, './packages/mock-data/src/index.ts'),
       '$app/navigation': path.resolve(__dirname, './tests/mocks/app-navigation.ts'),
       '$app/environment': path.resolve(__dirname, './tests/mocks/app-environment.ts')
-    }
+    },
+    conditions: process.env.VITEST ? ['browser'] : []
   },
   test: {
     include: ['tests/unit/**/*.{test,spec}.{js,ts}', 'tests/integration/**/*.{test,spec}.{js,ts}'],
