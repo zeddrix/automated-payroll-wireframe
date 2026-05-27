@@ -1,6 +1,6 @@
 # Automated Payroll — Wireframe
 
-This repository is **wireframe / proposal only**: a low-fidelity interactive app and shared UI packages for client demos and flow alignment before real development.
+This repository is **wireframe / proposal only**: a production-grade interactive wireframe app and shared UI packages for client demos and flow alignment before real development.
 
 ## Companion repo (production app)
 
@@ -24,7 +24,7 @@ pnpm test:e2e
 ## Structure
 
 - `wireframe/` — runnable prototype viewer
-- `packages/ui` — reusable low-fi components
+- `packages/ui` — reusable UI components
 - `packages/contracts` — modules, routes, test selectors
 - `packages/mock-data` — fixtures for demos and tests
 

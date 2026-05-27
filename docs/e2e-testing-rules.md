@@ -56,7 +56,7 @@ Group tests by feature domain, not by individual scenario. Canonical wireframe E
 | Domain                       | File                                                             |
 | ---------------------------- | ---------------------------------------------------------------- |
 | Shell, bootstrap, navigation | `tests/e2e/wireframe/wireframe-shell-and-navigation.e2e.test.ts` |
-| Auth hi-fi flows             | `tests/e2e/wireframe/wireframe-auth.e2e.test.ts`                 |
+| Auth flows                   | `tests/e2e/wireframe/wireframe-auth.e2e.test.ts`                 |
 | Admin reference              | `tests/e2e/wireframe/wireframe-admin.e2e.test.ts`                |
 | Device preview               | `tests/e2e/wireframe/wireframe-device-preview.e2e.test.ts`       |
 | Demo look toggle             | `tests/e2e/wireframe/wireframe-demo-look.e2e.test.ts`            |
@@ -310,4 +310,4 @@ await page.waitForLoadState('domcontentloaded');
 
 ### Demo look on future modules
 
-As new low-fi screens are added, gate proposal/demo copy with `DemoCopy` or `demoLook.enabled` the same way as auth and admin overview. Document new selectors in `packages/contracts`.
+As new wireframe screens are added, gate proposal/demo copy with `DemoCopy` or `demoLook.enabled` the same way as auth and admin overview. Document new selectors in `packages/contracts`.

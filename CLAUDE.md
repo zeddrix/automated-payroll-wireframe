@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-This repository is **wireframe-only**: low-fidelity interactive flows for an automated payroll system (HR, timekeeping, payroll, approvals). It is for **local development**, **client demos** before build, and **reference** while implementing the real app in the sibling repo `~/Documents/automated-payroll-system`.
+This repository is **wireframe-only**: production-grade interactive flows for an automated payroll system (HR, timekeeping, payroll, approvals). It is for **local development**, **client demos** before build, and **reference** while implementing the real app in the sibling repo `~/Documents/automated-payroll-system`.
 
-Wireframe screens are designed externally (e.g. Corsair U during proposal). This repo provides the shell, reusable low-fi components, and reference screens — not in-app AI wireframe generation.
+Wireframe screens are designed externally (e.g. Corsair U during proposal). This repo provides the shell, reusable UI components, and reference screens — not in-app AI wireframe generation.
 
 **Do not add a production payroll app to this repo.** Production code belongs in `automated-payroll-system`.
 
@@ -18,8 +18,8 @@ Wireframe screens are designed externally (e.g. Corsair U during proposal). This
 
 | Path                 | Purpose                                            |
 | -------------------- | -------------------------------------------------- |
-| `wireframe/`         | Runnable low-fi prototype / wireframe viewer       |
-| `packages/ui`        | Shared low-fi Svelte components                    |
+| `wireframe/`         | Runnable production-grade wireframe viewer         |
+| `packages/ui`        | Shared Svelte UI components                        |
 | `packages/contracts` | Module registry, routes, `data-testid` selectors   |
 | `packages/mock-data` | Deterministic fixtures for wireframe and tests     |
 | `tests/e2e`          | Playwright acceptance tests (`*.e2e.test.ts`)      |
@@ -44,7 +44,7 @@ Run `pnpm quality` before the **green phase** of TDD (not required during red/fa
 
 Submit/save buttons should be **disabled** when there is no valid, actionable input (see reference Auth login screen).
 
-Hi-fi auth validation lives in `@aps/mock-data` (Zod schemas). Sign-up enforces standard password policy (8+ chars, letter, number, special). Inline errors appear only after **blur** or **submit** — not on first paint. Sign-up shows a live password requirements checklist while typing; confirm password shows a match hint.
+Auth validation lives in `@aps/mock-data` (Zod schemas). Sign-up enforces standard password policy (8+ chars, letter, number, special). Inline errors appear only after **blur** or **submit** — not on first paint. Sign-up shows a live password requirements checklist while typing; confirm password shows a match hint.
 
 ## Testing
 

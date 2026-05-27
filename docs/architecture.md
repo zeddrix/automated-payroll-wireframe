@@ -4,12 +4,12 @@
 
 This repo exists only for **proposal-stage wireframes** for an automated payroll system (auth, admin, employees, attendance, payroll).
 
-| Piece                | Role                                                                                |
-| -------------------- | ----------------------------------------------------------------------------------- |
-| `wireframe/`         | Runnable low-fi app to preview flows and assemble external designs (e.g. Corsair U) |
-| `packages/ui`        | Reusable low-fi Svelte components                                                   |
-| `packages/contracts` | Module/tab registry and stable `data-testid` selectors                              |
-| `packages/mock-data` | Deterministic fixtures, Zod auth schemas — not business truth                       |
+| Piece                | Role                                                                                   |
+| -------------------- | -------------------------------------------------------------------------------------- |
+| `wireframe/`         | Runnable wireframe app to preview flows and assemble external designs (e.g. Corsair U) |
+| `packages/ui`        | Reusable Svelte UI components                                                          |
+| `packages/contracts` | Module/tab registry and stable `data-testid` selectors                                 |
+| `packages/mock-data` | Deterministic fixtures, Zod auth schemas — not business truth                          |
 
 There is **no** production backend, real auth, or payroll business logic here.
 
@@ -32,7 +32,7 @@ The real product is developed in **`~/Documents/automated-payroll-system`** (sib
 
 ## Package reuse rules (within this repo)
 
-- **Do** keep generic low-fi primitives in `packages/ui` (including `PasswordRequirements` driven by `@aps/mock-data` policy).
+- **Do** keep generic UI primitives in `packages/ui` (including `PasswordRequirements` driven by `@aps/mock-data` policy).
 - **Do not** put wireframe-only labels or mock banners inside `packages/ui` — keep those in `wireframe/`.
 - **Auth validation:** rules and schemas in `@aps/mock-data`; touched/blur/submit UX in wireframe auth views.
 
