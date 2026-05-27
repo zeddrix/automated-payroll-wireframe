@@ -1,8 +1,8 @@
 <script lang="ts">
   import { getForgotPasswordFieldErrors, isForgotPasswordSubmittable } from '@aps/mock-data';
   import { moduleTabPath, selectors } from '@aps/contracts';
-  import { AuthPageHeader, HiFiField, HiFiButton } from '@aps/ui';
-  import AuthHiFiShell from './AuthHiFiShell.svelte';
+  import { AuthPageHeader, Field, Button } from '@aps/ui';
+  import AuthShell from './AuthShell.svelte';
   import { demoLook } from '../../state/wireframe-demo-look.svelte';
 
   let email = $state('');
@@ -37,7 +37,7 @@
   }
 </script>
 
-<AuthHiFiShell panelTestId={selectors.authForgotPanel} {footerLinks}>
+<AuthShell panelTestId={selectors.authForgotPanel} {footerLinks}>
   <AuthPageHeader title="Forgot Password" {subtitle} sectionTitle="Reset request" />
   {#if showSuccess}
     <div class="success" data-testid={selectors.authForgotSuccess} role="status">
@@ -57,7 +57,7 @@
     </div>
   {:else}
     <form onsubmit={handleSubmit} novalidate>
-      <HiFiField
+      <Field
         id="forgot-email"
         label="Email"
         type="email"
@@ -68,12 +68,12 @@
           touched = { ...touched, email: true };
         }}
       />
-      <HiFiButton type="submit" disabled={!canSubmit} testId={selectors.authForgotSubmit}>
+      <Button type="submit" disabled={!canSubmit} testId={selectors.authForgotSubmit}>
         Send reset link
-      </HiFiButton>
+      </Button>
     </form>
   {/if}
-</AuthHiFiShell>
+</AuthShell>
 
 <style>
   .success {

@@ -38,19 +38,12 @@
     </div>
   </WireframeSection>
 
-  <WireframeSection title="ModuleTabs (low-fi + hi-fi variants)">
+  <WireframeSection title="ModuleTabs">
     <div class="tabs-stack">
-      <div class="specimen__label">lowfi</div>
+      <div class="specimen__label">Auth module tabs</div>
       <ModuleTabs
         tabs={authTabs.map((t) => ({ id: t.id, label: t.label, href: t.href }))}
         activeTabId="login"
-        variant="lowfi"
-      />
-      <div class="specimen__label">hifi</div>
-      <ModuleTabs
-        tabs={authTabs.map((t) => ({ id: t.id, label: t.label, href: t.href }))}
-        activeTabId="login"
-        variant="hifi"
       />
     </div>
   </WireframeSection>

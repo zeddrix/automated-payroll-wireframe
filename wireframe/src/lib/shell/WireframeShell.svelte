@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { Snippet } from 'svelte';
   import { goto } from '$app/navigation';
-  import { BottomNav, SidebarRail, ModuleTabs, LowFiButton } from '@aps/ui';
+  import { BottomNav, SidebarRail, ModuleTabs, Button } from '@aps/ui';
   import { selectors, type ModuleId, type TabId } from '@aps/contracts';
   import { buildModuleNavItems, buildTabNavItems } from './nav-items';
   import { wireframeUiState } from '../state/wireframe-ui-state.svelte';
@@ -33,7 +33,7 @@
   const tabNavItems = $derived(buildTabNavItems(moduleId, tabId));
   const isAuthModule = $derived(moduleId === 'auth');
   const isUiKitModule = $derived(moduleId === 'ui-kit');
-  const phaseLabel = $derived(isAuthModule ? 'Proposal / hi-fi auth' : 'Proposal / low-fi');
+  const phaseLabel = $derived(isAuthModule ? 'Proposal / auth' : 'Proposal / wireframe');
 
   const uiKitTabNavItems = $derived(
     isUiKitModule && uiKitLayout.mode === 'tabs'
@@ -75,14 +75,14 @@
         {/if}
       </span>
       {#if wireframeUiState.authenticated}
-        <LowFiButton
+        <Button
           variant="ghost"
           disabled={false}
           testId={selectors.authSignOut}
           onclick={() => wireframeUiState.signOut()}
         >
           Sign out
-        </LowFiButton>
+        </Button>
       {/if}
     </div>
   </header>
@@ -103,13 +103,11 @@
                 <ModuleTabs
                   tabs={uiKitTabNavItems.map((t) => ({ id: t.id, label: t.label, href: t.href }))}
                   activeTabId={tabId}
-                  variant="lowfi"
                 />
               {:else}
                 <ModuleTabs
                   tabs={tabNavItems.map((t) => ({ id: t.id, label: t.label, href: t.href }))}
                   activeTabId={tabId}
-                  variant={isAuthModule ? 'hifi' : 'lowfi'}
                 />
               {/if}
             </div>
@@ -138,11 +136,11 @@
     min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    background: #fff;
+    background: var(--auth-surface, #ffffff);
     width: 100%;
   }
   .shell--auth .shell__header {
-    border-bottom-color: #93c5fd;
+    border-bottom-color: var(--auth-border-focus, #93c5fd);
   }
   .shell__header {
     display: flex;
@@ -151,8 +149,8 @@
     align-items: center;
     gap: 0.75rem 1rem;
     padding: 0.75rem 1rem;
-    border-bottom: 2px solid #d4d4d8;
-    background: #fff;
+    border-bottom: 1px solid var(--auth-border, #e2e8f0);
+    background: var(--auth-surface, #ffffff);
   }
   .shell__brand-row {
     min-width: 0;
@@ -164,10 +162,10 @@
   .shell__phase {
     margin-left: 0.5rem;
     font-size: 0.75rem;
-    color: #71717a;
+    color: var(--auth-muted, #64748b);
   }
   .shell--auth .shell__phase {
-    color: #2563eb;
+    color: var(--auth-primary, #2563eb);
   }
   .shell__status {
     display: flex;

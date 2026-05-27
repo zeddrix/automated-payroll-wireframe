@@ -1,7 +1,7 @@
 <script lang="ts">
   import { filterMockRoles, MOCK_AUDIT_SNIPPET } from '@aps/mock-data';
   import { selectors } from '@aps/contracts';
-  import { WireframePage, WireframeSection, LowFiField, LowFiModal, LowFiTable } from '@aps/ui';
+  import { WireframePage, WireframeSection, Button, Field, Modal, Table } from '@aps/ui';
   import ReferenceMockBanner from '../shared/ReferenceMockBanner.svelte';
   import DemoCopy from '../shared/DemoCopy.svelte';
   import { demoLook } from '../../state/wireframe-demo-look.svelte';
@@ -31,16 +31,16 @@
     {/snippet}
 
     <WireframeSection title="Quick actions">
-      <button
-        type="button"
-        class="wf-btn"
-        data-testid={selectors.adminOpenRolesModal}
+      <Button
+        variant="primary"
+        disabled={false}
+        testId={selectors.adminOpenRolesModal}
         onclick={() => {
           rolesModalOpen = true;
         }}
       >
         Manage roles
-      </button>
+      </Button>
     </WireframeSection>
 
     <WireframeSection title={auditSectionTitle}>
@@ -56,7 +56,7 @@
   </WireframePage>
 </div>
 
-<LowFiModal
+<Modal
   open={rolesModalOpen}
   title={rolesModalTitle}
   testId={selectors.adminRolesModal}
@@ -64,26 +64,16 @@
     rolesModalOpen = false;
   }}
 >
-  <LowFiField
+  <Field
     id="roles-filter"
     label="Filter roles"
     bind:value={filterQuery}
     testId={selectors.adminRolesFilter}
   />
-  <LowFiTable columns={[...roleColumns]} rows={roleRows} testId={selectors.adminRolesTable} />
-</LowFiModal>
+  <Table columns={[...roleColumns]} rows={roleRows} testId={selectors.adminRolesTable} />
+</Modal>
 
 <style>
-  .wf-btn {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    border-radius: 4px;
-    border: 2px solid #52525b;
-    background: #e4e4e7;
-    color: #18181b;
-    cursor: pointer;
-  }
   .audit-list {
     margin: 0;
     padding-left: 1.25rem;

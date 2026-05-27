@@ -19,18 +19,18 @@
   let { panelTestId, children, footerLinks = [] }: Props = $props();
 </script>
 
-<div class="auth-hifi" data-testid={panelTestId}>
-  <div class="auth-hifi__backdrop">
-    <div class="auth-hifi__inner">
+<div class="auth-shell" data-testid={panelTestId}>
+  <div class="auth-shell__backdrop">
+    <div class="auth-shell__inner">
       {#if demoLook.enabled}
-        <div class="auth-hifi__banner">
+        <div class="auth-shell__banner">
           <ReferenceMockBanner />
         </div>
       {/if}
       <AuthCard>
         {@render children()}
         {#if footerLinks.length > 0}
-          <nav class="auth-hifi__footer" aria-label="Auth navigation">
+          <nav class="auth-shell__footer" aria-label="Auth navigation">
             {#each footerLinks as link (link.href)}
               <a href={link.href} data-testid={link.testId}>{link.label}</a>
             {/each}
@@ -42,11 +42,11 @@
 </div>
 
 <style>
-  .auth-hifi {
+  .auth-shell {
     margin: -0.5rem -0.5rem 0;
     padding: 0.5rem;
   }
-  .auth-hifi__backdrop {
+  .auth-shell__backdrop {
     padding: 1rem 0.5rem 1.5rem;
     background: linear-gradient(
       165deg,
@@ -56,18 +56,18 @@
     border-radius: var(--auth-radius-md, 10px);
     min-height: 12rem;
   }
-  .auth-hifi__inner {
+  .auth-shell__inner {
     max-width: 36rem;
     margin: 0 auto;
   }
-  .auth-hifi__banner :global(.banner) {
+  .auth-shell__banner :global(.banner) {
     border-color: var(--auth-border-focus, #93c5fd);
     background: var(--auth-primary-soft, #dbeafe);
     color: var(--auth-text, #0f172a);
     border-style: solid;
     margin-bottom: 1rem;
   }
-  .auth-hifi__footer {
+  .auth-shell__footer {
     display: flex;
     flex-wrap: wrap;
     gap: 0.75rem 1.25rem;
@@ -75,13 +75,13 @@
     padding-top: 1rem;
     border-top: 1px solid var(--auth-border, #e2e8f0);
   }
-  .auth-hifi__footer a {
+  .auth-shell__footer a {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--auth-primary, #2563eb);
     text-decoration: none;
   }
-  .auth-hifi__footer a:hover {
+  .auth-shell__footer a:hover {
     color: var(--auth-primary-hover, #1d4ed8);
     text-decoration: underline;
   }

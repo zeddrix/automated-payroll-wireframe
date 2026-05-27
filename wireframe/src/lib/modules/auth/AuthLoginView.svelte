@@ -7,8 +7,8 @@
     isLoginSubmittable
   } from '@aps/mock-data';
   import { moduleTabPath, selectors } from '@aps/contracts';
-  import { AuthPageHeader, HiFiField, HiFiButton, ErrorState } from '@aps/ui';
-  import AuthHiFiShell from './AuthHiFiShell.svelte';
+  import { AuthPageHeader, Field, Button, ErrorState } from '@aps/ui';
+  import AuthShell from './AuthShell.svelte';
   import DemoCopy from '../shared/DemoCopy.svelte';
   import { wireframeUiState } from '../../state/wireframe-ui-state.svelte';
   import { demoLook } from '../../state/wireframe-demo-look.svelte';
@@ -60,7 +60,7 @@
   }
 </script>
 
-<AuthHiFiShell panelTestId={selectors.authLoginPanel} {footerLinks}>
+<AuthShell panelTestId={selectors.authLoginPanel} {footerLinks}>
   <AuthPageHeader
     title="Login"
     subtitle={loginSubtitle}
@@ -68,7 +68,7 @@
     sectionTitle="Credentials"
   />
   <form onsubmit={handleSubmit} novalidate>
-    <HiFiField
+    <Field
       id="login-email"
       label="Email"
       type="email"
@@ -79,7 +79,7 @@
         touched = { ...touched, email: true };
       }}
     />
-    <HiFiField
+    <Field
       id="login-password"
       label="Password"
       type="password"
@@ -95,16 +95,14 @@
         <ErrorState title="Sign in failed" message={submitError} />
       </div>
     {/if}
-    <HiFiButton type="submit" disabled={!canSubmit} testId={selectors.authLoginSubmit}>
-      Sign in
-    </HiFiButton>
+    <Button type="submit" disabled={!canSubmit} testId={selectors.authLoginSubmit}>Sign in</Button>
   </form>
   <DemoCopy>
     <p class="hint" data-testid={selectors.authLoginDemoHint}>
       Demo: <code>{MOCK_VALID_EMAIL}</code> / <code>{MOCK_VALID_PASSWORD}</code>
     </p>
   </DemoCopy>
-</AuthHiFiShell>
+</AuthShell>
 
 <style>
   .hint {

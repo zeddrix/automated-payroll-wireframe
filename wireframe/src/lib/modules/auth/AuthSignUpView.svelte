@@ -1,14 +1,8 @@
 <script lang="ts">
   import { getSignUpFieldErrors, isSignUpSubmittable } from '@aps/mock-data';
   import { moduleTabPath, selectors } from '@aps/contracts';
-  import {
-    AuthPageHeader,
-    HiFiField,
-    HiFiButton,
-    PasswordRequirements,
-    PasswordMatchHint
-  } from '@aps/ui';
-  import AuthHiFiShell from './AuthHiFiShell.svelte';
+  import { AuthPageHeader, Field, Button, PasswordRequirements, PasswordMatchHint } from '@aps/ui';
+  import AuthShell from './AuthShell.svelte';
   import { demoLook } from '../../state/wireframe-demo-look.svelte';
 
   let name = $state('');
@@ -63,7 +57,7 @@
   }
 </script>
 
-<AuthHiFiShell panelTestId={selectors.authSignUpPanel} {footerLinks}>
+<AuthShell panelTestId={selectors.authSignUpPanel} {footerLinks}>
   <AuthPageHeader title="Sign Up" {subtitle} sectionTitle="Account details" />
   {#if showSuccess}
     <div class="success" data-testid={selectors.authSignUpSuccess} role="status">
@@ -82,7 +76,7 @@
     </div>
   {:else}
     <form onsubmit={handleSubmit} novalidate>
-      <HiFiField
+      <Field
         id="signup-name"
         label="Full name"
         bind:value={name}
@@ -92,7 +86,7 @@
           touched = { ...touched, name: true };
         }}
       />
-      <HiFiField
+      <Field
         id="signup-email"
         label="Email"
         type="email"
@@ -103,7 +97,7 @@
           touched = { ...touched, email: true };
         }}
       />
-      <HiFiField
+      <Field
         id="signup-password"
         label="Password"
         type="password"
@@ -120,7 +114,7 @@
         testId={selectors.authSignUpPasswordRequirements}
         requirementTestId={selectors.passwordRequirement}
       />
-      <HiFiField
+      <Field
         id="signup-confirm"
         label="Confirm password"
         type="password"
@@ -146,12 +140,12 @@
       {#if fieldErrors.termsAccepted}
         <p class="terms-error" role="alert">{fieldErrors.termsAccepted}</p>
       {/if}
-      <HiFiButton type="submit" disabled={!canSubmit} testId={selectors.authSignUpSubmit}>
+      <Button type="submit" disabled={!canSubmit} testId={selectors.authSignUpSubmit}>
         Create account
-      </HiFiButton>
+      </Button>
     </form>
   {/if}
-</AuthHiFiShell>
+</AuthShell>
 
 <style>
   .terms {

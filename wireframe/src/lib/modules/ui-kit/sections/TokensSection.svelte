@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { WireframeSection, lowfi, hifiBlue, devicePreview } from '@aps/ui';
+  import { WireframeSection, blueTheme, devicePreview } from '@aps/ui';
   import { selectors } from '@aps/contracts';
 
   const typographySamples = [
@@ -12,15 +12,11 @@
   ] as const;
 
   const colorGroups = [
-    { title: 'Low-fi', tokens: lowfi.colors },
-    { title: 'Hi-fi (blue)', tokens: hifiBlue.colors },
+    { title: 'Blue theme', tokens: blueTheme.colors },
     { title: 'Device preview', tokens: devicePreview.colors }
   ] as const;
 
-  const radiusGroups = [
-    { title: 'Low-fi radius', tokens: lowfi.radius },
-    { title: 'Hi-fi radius', tokens: hifiBlue.radius }
-  ] as const;
+  const radiusGroups = [{ title: 'Blue theme radius', tokens: blueTheme.radius }] as const;
 </script>
 
 <div data-testid={selectors.uiKitTokensSection}>
@@ -86,16 +82,16 @@
       {/each}
 
       <div class="card">
-        <div class="card__title">Hi-fi shadow</div>
+        <div class="card__title">Blue theme shadow</div>
         <div class="samples">
           <div class="sample">
             <div
               class="sample__box"
-              style={`box-shadow: ${hifiBlue.shadow.card}; border-radius: ${hifiBlue.radius.md};`}
+              style={`box-shadow: ${blueTheme.shadow.card}; border-radius: ${blueTheme.radius.md};`}
             ></div>
             <div class="sample__meta">
               <div class="sample__key">card</div>
-              <div class="sample__value">{hifiBlue.shadow.card}</div>
+              <div class="sample__value">{blueTheme.shadow.card}</div>
             </div>
           </div>
         </div>
