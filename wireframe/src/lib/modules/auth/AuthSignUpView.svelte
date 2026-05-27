@@ -3,6 +3,7 @@
   import { moduleTabPath, selectors } from '@aps/contracts';
   import { AuthPageHeader, HiFiField, HiFiButton } from '@aps/ui';
   import AuthHiFiShell from './AuthHiFiShell.svelte';
+  import { demoLook } from '../../state/wireframe-demo-look.svelte';
 
   let name = $state('');
   let email = $state('');
@@ -17,8 +18,19 @@
   );
 
   const footerLinks = [
-    { label: 'Already have an account? Sign in', href: moduleTabPath('auth', 'login') }
+    {
+      label: 'Already have an account? Sign in',
+      href: moduleTabPath('auth', 'login'),
+      testId: selectors.authFooterLinkLogin
+    }
   ];
+
+  const subtitle = $derived(
+    demoLook.enabled ? 'Create a demo account — mock data only' : 'Create your account'
+  );
+  const termsLabel = $derived(
+    demoLook.enabled ? 'I agree to the terms of service (demo)' : 'I agree to the terms of service'
+  );
 
   function handleSubmit(event: Event) {
     event.preventDefault();
@@ -33,18 +45,21 @@
 </script>
 
 <AuthHiFiShell panelTestId={selectors.authSignUpPanel} {footerLinks}>
-  <AuthPageHeader
-    title="Sign Up"
-    subtitle="Create a demo account — mock data only"
-    sectionTitle="Account details"
-  />
+  <AuthPageHeader title="Sign Up" {subtitle} sectionTitle="Account details" />
   {#if showSuccess}
     <div class="success" data-testid={selectors.authSignUpSuccess} role="status">
-      <p class="success__title">Account created (demo)</p>
-      <p class="success__message">
-        This is a wireframe preview. No account was stored. You can continue to
-        <a href={moduleTabPath('auth', 'login')}>sign in</a> with demo credentials.
-      </p>
+      {#if demoLook.enabled}
+        <p class="success__title">Account created (demo)</p>
+        <p class="success__message">
+          This is a wireframe preview. No account was stored. You can continue to
+          <a href={moduleTabPath('auth', 'login')}>sign in</a> with demo credentials.
+        </p>
+      {:else}
+        <p class="success__title">Account created</p>
+        <p class="success__message">
+          You can <a href={moduleTabPath('auth', 'login')}>sign in</a> with your new account.
+        </p>
+      {/if}
     </div>
   {:else}
     <form onsubmit={handleSubmit}>
@@ -85,7 +100,7 @@
           bind:checked={termsAccepted}
           data-testid={selectors.authSignUpTerms}
         />
-        <span>I agree to the terms of service (demo)</span>
+        <span>{termsLabel}</span>
       </label>
       {#if fieldError && name.trim() && email.trim() && password && confirmPassword}
         <p class="form-error" role="alert">{fieldError}</p>

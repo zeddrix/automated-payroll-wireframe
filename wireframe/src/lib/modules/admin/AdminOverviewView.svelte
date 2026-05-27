@@ -3,6 +3,11 @@
   import { selectors } from '@aps/contracts';
   import { WireframePage, WireframeSection, LowFiField, LowFiModal, LowFiTable } from '@aps/ui';
   import ReferenceMockBanner from '../shared/ReferenceMockBanner.svelte';
+  import DemoCopy from '../shared/DemoCopy.svelte';
+  import { demoLook } from '../../state/wireframe-demo-look.svelte';
+
+  const auditSectionTitle = $derived(demoLook.enabled ? 'Recent audit (mock)' : 'Recent audit');
+  const rolesModalTitle = $derived(demoLook.enabled ? 'Roles (mock)' : 'Roles');
 
   let rolesModalOpen = $state(false);
   let filterQuery = $state('');
@@ -20,7 +25,9 @@
 <div data-testid={selectors.adminOverviewPanel}>
   <WireframePage title="Admin overview" subtitle="Roles & audit — reference pattern">
     {#snippet banner()}
-      <ReferenceMockBanner />
+      <DemoCopy>
+        <ReferenceMockBanner />
+      </DemoCopy>
     {/snippet}
 
     <WireframeSection title="Quick actions">
@@ -36,7 +43,7 @@
       </button>
     </WireframeSection>
 
-    <WireframeSection title="Recent audit (mock)">
+    <WireframeSection title={auditSectionTitle}>
       <ul class="audit-list" data-testid={selectors.adminAuditSnippet}>
         {#each MOCK_AUDIT_SNIPPET as entry (entry.id)}
           <li>
@@ -51,7 +58,7 @@
 
 <LowFiModal
   open={rolesModalOpen}
-  title="Roles (mock)"
+  title={rolesModalTitle}
   testId={selectors.adminRolesModal}
   onclose={() => {
     rolesModalOpen = false;

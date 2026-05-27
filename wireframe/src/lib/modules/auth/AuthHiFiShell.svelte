@@ -2,10 +2,12 @@
   import type { Snippet } from 'svelte';
   import { AuthCard } from '@aps/ui';
   import ReferenceMockBanner from '../shared/ReferenceMockBanner.svelte';
+  import { demoLook } from '../../state/wireframe-demo-look.svelte';
 
   interface FooterLink {
     label: string;
     href: string;
+    testId?: string;
   }
 
   interface Props {
@@ -20,15 +22,17 @@
 <div class="auth-hifi" data-testid={panelTestId}>
   <div class="auth-hifi__backdrop">
     <div class="auth-hifi__inner">
-      <div class="auth-hifi__banner">
-        <ReferenceMockBanner />
-      </div>
+      {#if demoLook.enabled}
+        <div class="auth-hifi__banner">
+          <ReferenceMockBanner />
+        </div>
+      {/if}
       <AuthCard>
         {@render children()}
         {#if footerLinks.length > 0}
           <nav class="auth-hifi__footer" aria-label="Auth navigation">
             {#each footerLinks as link (link.href)}
-              <a href={link.href}>{link.label}</a>
+              <a href={link.href} data-testid={link.testId}>{link.label}</a>
             {/each}
           </nav>
         {/if}

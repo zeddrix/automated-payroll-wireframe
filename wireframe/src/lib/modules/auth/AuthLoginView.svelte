@@ -8,7 +8,9 @@
   import { moduleTabPath, selectors } from '@aps/contracts';
   import { AuthPageHeader, HiFiField, HiFiButton, ErrorState } from '@aps/ui';
   import AuthHiFiShell from './AuthHiFiShell.svelte';
+  import DemoCopy from '../shared/DemoCopy.svelte';
   import { wireframeUiState } from '../../state/wireframe-ui-state.svelte';
+  import { demoLook } from '../../state/wireframe-demo-look.svelte';
 
   let email = $state('');
   let password = $state('');
@@ -20,9 +22,27 @@
   );
 
   const footerLinks = [
-    { label: 'Create account', href: moduleTabPath('auth', 'sign-up') },
-    { label: 'Forgot password?', href: moduleTabPath('auth', 'forgot-password') }
+    {
+      label: 'Create account',
+      href: moduleTabPath('auth', 'sign-up'),
+      testId: selectors.authFooterLinkSignUp
+    },
+    {
+      label: 'Forgot password?',
+      href: moduleTabPath('auth', 'forgot-password'),
+      testId: selectors.authFooterLinkForgot
+    }
   ];
+
+  const loginSubtitle = $derived(
+    demoLook.enabled ? 'Auth milestone — reference pattern' : 'Sign in to your account'
+  );
+
+  const invalidCredentialsMessage = $derived(
+    demoLook.enabled
+      ? 'Invalid credentials. Use the demo email and password shown below.'
+      : 'Invalid credentials.'
+  );
 
   function handleSubmit(event: Event) {
     event.preventDefault();
@@ -34,7 +54,7 @@
     }
     fieldError = null;
     if (!validateMockLogin(email, password)) {
-      submitError = 'Invalid credentials. Use the demo email and password shown below.';
+      submitError = invalidCredentialsMessage;
       return;
     }
     wireframeUiState.signIn(email);
@@ -42,7 +62,12 @@
 </script>
 
 <AuthHiFiShell panelTestId={selectors.authLoginPanel} {footerLinks}>
-  <AuthPageHeader title="Login" subtitle="Auth milestone — reference pattern" sectionTitle="Credentials" />
+  <AuthPageHeader
+    title="Login"
+    subtitle={loginSubtitle}
+    subtitleTestId={selectors.authLoginSubtitle}
+    sectionTitle="Credentials"
+  />
   <form onsubmit={handleSubmit}>
     <HiFiField
       id="login-email"
@@ -69,9 +94,11 @@
       Sign in
     </HiFiButton>
   </form>
-  <p class="hint">
-    Demo: <code>{MOCK_VALID_EMAIL}</code> / <code>{MOCK_VALID_PASSWORD}</code>
-  </p>
+  <DemoCopy>
+    <p class="hint" data-testid={selectors.authLoginDemoHint}>
+      Demo: <code>{MOCK_VALID_EMAIL}</code> / <code>{MOCK_VALID_PASSWORD}</code>
+    </p>
+  </DemoCopy>
 </AuthHiFiShell>
 
 <style>
