@@ -16,15 +16,15 @@ Wireframe screens are designed externally (e.g. Corsair U during proposal). This
 
 ## Repository Layout
 
-| Path                 | Purpose                                              |
-| -------------------- | ---------------------------------------------------- |
-| `wireframe/`         | Runnable low-fi prototype / wireframe viewer         |
-| `packages/ui`        | Shared low-fi Svelte components                      |
+| Path                 | Purpose                                            |
+| -------------------- | -------------------------------------------------- |
+| `wireframe/`         | Runnable low-fi prototype / wireframe viewer       |
+| `packages/ui`        | Shared low-fi Svelte components                    |
 | `packages/contracts` | Module registry, routes, `data-testid` selectors   |
-| `packages/mock-data` | Deterministic fixtures for wireframe and tests       |
-| `tests/e2e`          | Playwright acceptance tests (`*.e2e.test.ts`)        |
-| `tests/unit`         | Vitest unit tests (`*.unit.test.ts`)                 |
-| `tests/integration`  | Vitest integration tests (`*.integration.test.ts`)   |
+| `packages/mock-data` | Deterministic fixtures for wireframe and tests     |
+| `tests/e2e`          | Playwright acceptance tests (`*.e2e.test.ts`)      |
+| `tests/unit`         | Vitest unit tests (`*.unit.test.ts`)               |
+| `tests/integration`  | Vitest integration tests (`*.integration.test.ts`) |
 
 ## Quality Standards
 
