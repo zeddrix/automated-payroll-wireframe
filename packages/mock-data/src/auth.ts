@@ -25,3 +25,51 @@ export function validateLoginForm(email: string, password: string): string | nul
   }
   return null;
 }
+
+export function validateSignUpForm(
+  name: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+  termsAccepted: boolean
+): string | null {
+  const trimmedName = name.trim();
+  if (!trimmedName) {
+    return 'Full name is required';
+  }
+  if (trimmedName.length < 2) {
+    return 'Full name must be at least 2 characters';
+  }
+  if (!email.trim()) {
+    return 'Email is required';
+  }
+  if (!email.includes('@')) {
+    return 'Enter a valid email address';
+  }
+  if (!password) {
+    return 'Password is required';
+  }
+  if (password.length < 6) {
+    return 'Password must be at least 6 characters';
+  }
+  if (!confirmPassword) {
+    return 'Please confirm your password';
+  }
+  if (password !== confirmPassword) {
+    return 'Passwords do not match';
+  }
+  if (!termsAccepted) {
+    return 'You must accept the terms to continue';
+  }
+  return null;
+}
+
+export function validateForgotPasswordForm(email: string): string | null {
+  if (!email.trim()) {
+    return 'Email is required';
+  }
+  if (!email.includes('@')) {
+    return 'Enter a valid email address';
+  }
+  return null;
+}

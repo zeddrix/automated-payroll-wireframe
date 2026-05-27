@@ -26,6 +26,26 @@ export const selectors = {
   authLoginError: 'auth-login-error',
   authSignOut: 'auth-sign-out',
 
+  authSignUpPanel: 'auth-sign-up-panel',
+  authSignUpName: 'auth-sign-up-name',
+  authSignUpEmail: 'auth-sign-up-email',
+  authSignUpPassword: 'auth-sign-up-password',
+  authSignUpConfirmPassword: 'auth-sign-up-confirm-password',
+  authSignUpTerms: 'auth-sign-up-terms',
+  authSignUpSubmit: 'auth-sign-up-submit',
+  authSignUpSuccess: 'auth-sign-up-success',
+
+  authForgotPanel: 'auth-forgot-panel',
+  authForgotEmail: 'auth-forgot-email',
+  authForgotSubmit: 'auth-forgot-submit',
+  authForgotSuccess: 'auth-forgot-success',
+
+  viewportPreviewToggle: 'viewport-preview-toggle',
+  viewportPreviewMobile: 'viewport-preview-mobile',
+  viewportPreviewTablet: 'viewport-preview-tablet',
+  viewportPreviewDesktop: 'viewport-preview-desktop',
+  viewportPreviewSystem: 'viewport-preview-system',
+
   adminOverviewPanel: 'admin-overview-panel',
   adminOpenRolesModal: 'admin-open-roles-modal',
   adminRolesModal: 'admin-roles-modal',
