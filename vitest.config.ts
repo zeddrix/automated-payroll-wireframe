@@ -13,7 +13,8 @@ export default defineConfig({
       '@aps/ui': path.resolve(__dirname, './packages/ui/src/lib/index.ts'),
       '@aps/mock-data': path.resolve(__dirname, './packages/mock-data/src/index.ts'),
       '$app/navigation': path.resolve(__dirname, './tests/mocks/app-navigation.ts'),
-      '$app/environment': path.resolve(__dirname, './tests/mocks/app-environment.ts')
+      '$app/environment': path.resolve(__dirname, './tests/mocks/app-environment.ts'),
+      '$app/paths': path.resolve(__dirname, './tests/mocks/app-paths.ts')
     },
     conditions: process.env.VITEST ? ['browser'] : []
   },

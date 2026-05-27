@@ -66,6 +66,7 @@ export default ts.config(
   {
     ignores: [
       'build/**',
+      'wireframe/build/**',
       '**/.svelte-kit/**',
       'dist/**',
       'node_modules/**',
