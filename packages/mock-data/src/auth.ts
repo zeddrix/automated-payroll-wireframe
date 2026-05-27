@@ -1,5 +1,10 @@
+import { parseForgotPassword, parseLogin, parseSignUp } from './auth-schemas.js';
+
 export const MOCK_VALID_EMAIL = 'admin@wireframe.local';
-export const MOCK_VALID_PASSWORD = 'wireframe-demo';
+export const MOCK_VALID_PASSWORD = 'Wireframe1!';
+
+/** Valid sign-up password for tests and E2E */
+export const SIGNUP_VALID_PASSWORD = 'SecurePass1!';
 
 export interface MockAuthCredentials {
   email: string;
@@ -11,19 +16,8 @@ export function validateMockLogin(email: string, password: string): boolean {
 }
 
 export function validateLoginForm(email: string, password: string): string | null {
-  if (!email.trim()) {
-    return 'Email is required';
-  }
-  if (!email.includes('@')) {
-    return 'Enter a valid email address';
-  }
-  if (!password) {
-    return 'Password is required';
-  }
-  if (password.length < 6) {
-    return 'Password must be at least 6 characters';
-  }
-  return null;
+  const result = parseLogin(email, password);
+  return result.success ? null : (result.error ?? 'Validation failed');
 }
 
 export function validateSignUpForm(
@@ -33,43 +27,11 @@ export function validateSignUpForm(
   confirmPassword: string,
   termsAccepted: boolean
 ): string | null {
-  const trimmedName = name.trim();
-  if (!trimmedName) {
-    return 'Full name is required';
-  }
-  if (trimmedName.length < 2) {
-    return 'Full name must be at least 2 characters';
-  }
-  if (!email.trim()) {
-    return 'Email is required';
-  }
-  if (!email.includes('@')) {
-    return 'Enter a valid email address';
-  }
-  if (!password) {
-    return 'Password is required';
-  }
-  if (password.length < 6) {
-    return 'Password must be at least 6 characters';
-  }
-  if (!confirmPassword) {
-    return 'Please confirm your password';
-  }
-  if (password !== confirmPassword) {
-    return 'Passwords do not match';
-  }
-  if (!termsAccepted) {
-    return 'You must accept the terms to continue';
-  }
-  return null;
+  const result = parseSignUp(name, email, password, confirmPassword, termsAccepted);
+  return result.success ? null : (result.error ?? 'Validation failed');
 }
 
 export function validateForgotPasswordForm(email: string): string | null {
-  if (!email.trim()) {
-    return 'Email is required';
-  }
-  if (!email.includes('@')) {
-    return 'Enter a valid email address';
-  }
-  return null;
+  const result = parseForgotPassword(email);
+  return result.success ? null : (result.error ?? 'Validation failed');
 }
