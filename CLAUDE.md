@@ -44,6 +44,8 @@ Run `pnpm quality` before the **green phase** of TDD (not required during red/fa
 
 Submit/save buttons should be **disabled** when there is no valid, actionable input (see reference Auth login screen).
 
+Hi-fi auth validation lives in `@aps/mock-data` (Zod schemas). Sign-up enforces standard password policy (8+ chars, letter, number, special). Inline errors appear only after **blur** or **submit** — not on first paint. Sign-up shows a live password requirements checklist while typing; confirm password shows a match hint.
+
 ## Testing
 
 Follow:

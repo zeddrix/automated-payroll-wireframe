@@ -33,4 +33,4 @@ See [docs/architecture.md](docs/architecture.md).
 ## Demo login (reference screen)
 
 - Email: `admin@wireframe.local`
-- Password: `wireframe-demo`
+- Password: `Wireframe1!`
