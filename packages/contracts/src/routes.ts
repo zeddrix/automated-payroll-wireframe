@@ -1,5 +1,19 @@
 import type { ModuleId, TabId } from './modules.js';
-import { getModule, isModuleId, isTabIdForModule } from './modules.js';
+import { getModule, isModuleId, isTabIdForModule, MODULES } from './modules.js';
+
+export interface ModuleTabPrerenderEntry {
+  module: ModuleId;
+  tab: TabId;
+}
+
+export function listModuleTabPrerenderEntries(): ModuleTabPrerenderEntry[] {
+  return MODULES.flatMap((mod) =>
+    mod.tabs.map((tab) => ({
+      module: mod.id,
+      tab: tab.id
+    }))
+  );
+}
 
 export function moduleTabPath(moduleId: ModuleId, tabId: TabId): string {
   return `/${moduleId}/${tabId}`;
