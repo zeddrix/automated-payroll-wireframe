@@ -25,7 +25,7 @@
   }
   .auth-header__title {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: var(--text-title, 1.5rem);
     font-weight: 700;
     color: var(--auth-text, #0f172a);
     letter-spacing: -0.02em;

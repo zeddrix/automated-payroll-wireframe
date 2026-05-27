@@ -130,7 +130,7 @@
   }
   .field__label {
     display: block;
-    font-size: 0.8125rem;
+    font-size: clamp(0.75rem, 0.15cqi + 0.72rem, 0.8125rem);
     font-weight: 600;
     color: var(--auth-text, #0f172a);
     margin-bottom: 0.375rem;
@@ -140,10 +140,10 @@
   }
   .field__input {
     width: 100%;
-    padding: 0.625rem 0.875rem;
+    padding: clamp(0.5rem, 1.5cqi, 0.625rem) clamp(0.75rem, 2cqi, 0.875rem);
     border: 1px solid var(--auth-border, #e2e8f0);
     border-radius: var(--auth-radius-sm, 6px);
-    font-size: 0.9375rem;
+    font-size: var(--text-body, 0.9375rem);
     background: var(--auth-surface, #ffffff);
     color: var(--auth-text, #0f172a);
     box-sizing: border-box;

@@ -1,3 +1,5 @@
+import { devicePreviewWidths } from './layout-tokens.js';
+
 export const devicePreview = {
   colors: {
     stage: '#e2e8f0',
@@ -7,8 +9,8 @@ export const devicePreview = {
     statusBar: '#0f172a'
   },
   widths: {
-    mobile: '390px',
-    tablet: '768px',
-    desktop: '1280px'
+    mobile: `${devicePreviewWidths.mobile}px`,
+    tablet: `${devicePreviewWidths.tablet}px`,
+    desktop: `${devicePreviewWidths.desktop}px`
   }
 } as const;

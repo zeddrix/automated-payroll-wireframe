@@ -1,0 +1,70 @@
+/**
+ * Container-query layout rules for content inside wireframe-screen (device preview).
+ * Shell chrome still uses viewport @media in WireframeShell.
+ */
+
+.ui-kit-button-row {
+  grid-template-columns: 1fr;
+}
+
+.ui-kit-responsive-grid {
+  grid-template-columns: 1fr;
+}
+
+.ui-kit-nav-grid {
+  grid-template-columns: 1fr;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: min(100%, 28rem);
+  margin: 0 auto;
+  padding: 1.5rem;
+  box-sizing: border-box;
+}
+
+@container wireframe-screen (max-width: 390px) {
+  .auth-card {
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .auth-shell__backdrop {
+    padding-left: var(--space-page-x, 0.75rem);
+    padding-right: var(--space-page-x, 0.75rem);
+  }
+
+  .ui-kit-button-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container wireframe-screen (min-width: 391px) and (max-width: 767px) {
+  .auth-card {
+    max-width: min(100%, 28rem);
+  }
+}
+
+@container wireframe-screen (min-width: 640px) {
+  .auth-card {
+    padding: 2rem;
+  }
+}
+
+@container wireframe-screen (min-width: 768px) {
+  .auth-card {
+    max-width: min(100%, var(--content-max-auth, 32rem));
+  }
+
+  .ui-kit-button-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .ui-kit-responsive-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ui-kit-nav-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

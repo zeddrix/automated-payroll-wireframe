@@ -37,9 +37,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 2.75rem;
+    min-height: max(2.75rem, 44px);
     padding: 0.625rem 1.25rem;
-    font-size: 0.9375rem;
+    font-size: var(--text-body, 0.9375rem);
     font-weight: 600;
     border-radius: var(--auth-radius-sm, 6px);
     border: 1px solid transparent;

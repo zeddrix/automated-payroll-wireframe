@@ -27,14 +27,22 @@
   data-device-mode={mode}
 >
   {#if mode === 'system'}
-    <div class="device-frame__pass" data-testid={screenTestId}>
+    <div
+      class="device-frame__pass"
+      data-testid={screenTestId}
+      data-layout-container="wireframe-screen"
+    >
       {@render children()}
     </div>
   {:else if mode === 'mobile'}
     <div class="device-frame__stage">
       <div class="device-frame__phone">
         <div class="device-frame__phone-notch" aria-hidden="true"></div>
-        <div class="device-frame__phone-screen" data-testid={screenTestId}>
+        <div
+          class="device-frame__phone-screen"
+          data-testid={screenTestId}
+          data-layout-container="wireframe-screen"
+        >
           {@render children()}
         </div>
       </div>
@@ -42,7 +50,11 @@
   {:else if mode === 'tablet'}
     <div class="device-frame__stage">
       <div class="device-frame__tablet">
-        <div class="device-frame__tablet-screen" data-testid={screenTestId}>
+        <div
+          class="device-frame__tablet-screen"
+          data-testid={screenTestId}
+          data-layout-container="wireframe-screen"
+        >
           {@render children()}
         </div>
       </div>
@@ -50,7 +62,11 @@
   {:else}
     <div class="device-frame__stage">
       <div class="device-frame__desktop">
-        <div class="device-frame__desktop-screen" data-testid={screenTestId}>
+        <div
+          class="device-frame__desktop-screen"
+          data-testid={screenTestId}
+          data-layout-container="wireframe-screen"
+        >
           {@render children()}
         </div>
         <div class="device-frame__desktop-stand" aria-hidden="true"></div>
@@ -65,6 +81,8 @@
   }
   .device-frame--system .device-frame__pass {
     width: 100%;
+    container-type: inline-size;
+    container-name: wireframe-screen;
   }
   .device-frame__stage {
     display: flex;
@@ -91,11 +109,14 @@
     border-radius: 999px;
   }
   .device-frame__phone-screen {
+    width: 100%;
     max-height: 70dvh;
     overflow: auto;
     background: #fff;
     border-radius: 1.25rem;
     -webkit-overflow-scrolling: touch;
+    container-type: inline-size;
+    container-name: wireframe-screen;
   }
   .device-frame__tablet {
     width: 100%;
@@ -106,10 +127,13 @@
     box-shadow: 0 8px 32px rgba(15, 23, 42, 0.15);
   }
   .device-frame__tablet-screen {
+    width: 100%;
     max-height: 75dvh;
     overflow: auto;
     background: #fff;
     border-radius: 0.5rem;
+    container-type: inline-size;
+    container-name: wireframe-screen;
   }
   .device-frame__desktop {
     width: 100%;
@@ -126,6 +150,8 @@
     border: 2px solid #334155;
     border-radius: 0.5rem 0.5rem 0 0;
     box-shadow: 0 4px 24px rgba(15, 23, 42, 0.1);
+    container-type: inline-size;
+    container-name: wireframe-screen;
   }
   .device-frame__desktop-stand {
     width: 6rem;

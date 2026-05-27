@@ -57,7 +57,7 @@
     padding: 1rem;
   }
   .modal {
-    width: min(100%, 32rem);
+    width: min(100%, var(--content-max-auth, 32rem));
     max-height: 90vh;
     overflow: auto;
     background: var(--auth-surface, #ffffff);

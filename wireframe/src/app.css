@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import '../../packages/ui/src/lib/tokens/responsive-layout.css';
 
 *,
 *::before,
@@ -23,6 +24,16 @@
   --auth-shadow-card: 0 4px 24px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(15, 23, 42, 0.06);
   --auth-page-gradient-start: #eff6ff;
   --auth-page-gradient-end: #f8fafc;
+  --bp-sm: 640px;
+  --bp-md: 768px;
+  --bp-content-narrow: 390px;
+  --bp-content-tablet: 768px;
+  --bp-content-wide: 1280px;
+  --content-max-auth: 32rem;
+  --content-max-auth-shell: 32rem;
+  --space-page-x: clamp(0.75rem, 2vw, 1.5rem);
+  --text-body: clamp(0.875rem, 0.2vw + 0.84rem, 0.9375rem);
+  --text-title: clamp(1.25rem, 0.5vw + 1.1rem, 1.5rem);
 }
 
 body {
