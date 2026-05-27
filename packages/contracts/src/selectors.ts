@@ -39,6 +39,10 @@ export const selectors = {
   authSignUpTerms: 'auth-sign-up-terms',
   authSignUpSubmit: 'auth-sign-up-submit',
   authSignUpSuccess: 'auth-sign-up-success',
+  authSignUpPasswordRequirements: 'auth-sign-up-password-requirements',
+  authSignUpPasswordMatch: 'auth-sign-up-password-match',
+  passwordRequirement: (id: string) => `password-requirement-${id}`,
+  fieldVisibilityToggle: (fieldTestId: string) => `${fieldTestId}-visibility-toggle`,
 
   authForgotPanel: 'auth-forgot-panel',
   authForgotEmail: 'auth-forgot-email',
