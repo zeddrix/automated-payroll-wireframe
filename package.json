@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "pnpm -C wireframe dev",
     "build": "pnpm -C wireframe build",
+    "build:pages": "BASE_PATH=/automated-payroll-wireframe pnpm -C wireframe build",
+    "preview:pages": "BASE_PATH=/automated-payroll-wireframe pnpm -C wireframe preview",
     "sync": "pnpm -C wireframe sync",
     "check": "pnpm sync && pnpm exec svelte-check --tsconfig wireframe/tsconfig.json",
     "quality:types-and-lint": "pnpm sync && concurrently -n check,lint -c blue,green \"pnpm exec svelte-check --tsconfig wireframe/tsconfig.json\" \"pnpm lint\"",
