@@ -17,8 +17,7 @@ export type TabId =
   | 'adjustments'
   | 'approval'
   | 'tokens'
-  | 'low-fi'
-  | 'hi-fi'
+  | 'components'
   | 'navigation'
   | 'catalog';
 
@@ -91,8 +90,7 @@ export const MODULES: ModuleDefinition[] = [
     defaultTab: 'tokens',
     tabs: [
       { id: 'tokens', label: 'Tokens' },
-      { id: 'low-fi', label: 'Low-fi' },
-      { id: 'hi-fi', label: 'Hi-fi' },
+      { id: 'components', label: 'Components' },
       { id: 'navigation', label: 'Navigation' },
       { id: 'catalog', label: 'Catalog' }
     ]
