@@ -17,3 +17,22 @@ body {
   background: #f4f4f5;
   color: #18181b;
 }
+
+.auth-hifi {
+  --auth-primary: #2563eb;
+  --auth-primary-hover: #1d4ed8;
+  --auth-primary-soft: #dbeafe;
+  --auth-surface: #ffffff;
+  --auth-border: #e2e8f0;
+  --auth-border-focus: #93c5fd;
+  --auth-text: #0f172a;
+  --auth-muted: #64748b;
+  --auth-danger: #dc2626;
+  --auth-danger-soft: #fef2f2;
+  --auth-radius-sm: 6px;
+  --auth-radius-md: 10px;
+  --auth-radius-lg: 14px;
+  --auth-shadow-card: 0 4px 24px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(15, 23, 42, 0.06);
+  --auth-page-gradient-start: #eff6ff;
+  --auth-page-gradient-end: #f8fafc;
+}

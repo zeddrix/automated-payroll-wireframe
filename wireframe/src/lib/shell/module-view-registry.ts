@@ -1,6 +1,8 @@
 import type { Component } from 'svelte';
 import { selectors, type ModuleId, type TabId } from '@aps/contracts';
 import AuthLoginView from '../modules/auth/AuthLoginView.svelte';
+import AuthSignUpView from '../modules/auth/AuthSignUpView.svelte';
+import AuthForgotPasswordView from '../modules/auth/AuthForgotPasswordView.svelte';
 import AdminOverviewView from '../modules/admin/AdminOverviewView.svelte';
 import PlaceholderView from '../modules/shared/PlaceholderView.svelte';
 
@@ -8,6 +10,8 @@ type ViewKey = `${ModuleId}:${TabId}`;
 
 const REFERENCE_VIEWS: Partial<Record<ViewKey, Component>> = {
   'auth:login': AuthLoginView,
+  'auth:sign-up': AuthSignUpView,
+  'auth:forgot-password': AuthForgotPasswordView,
   'admin:overview': AdminOverviewView
 };
 

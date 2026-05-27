@@ -5,9 +5,9 @@
     validateLoginForm,
     validateMockLogin
   } from '@aps/mock-data';
-  import { selectors } from '@aps/contracts';
-  import { WireframePage, WireframeSection, LowFiField, LowFiButton, ErrorState } from '@aps/ui';
-  import ReferenceMockBanner from '../shared/ReferenceMockBanner.svelte';
+  import { moduleTabPath, selectors } from '@aps/contracts';
+  import { AuthPageHeader, HiFiField, HiFiButton, ErrorState } from '@aps/ui';
+  import AuthHiFiShell from './AuthHiFiShell.svelte';
   import { wireframeUiState } from '../../state/wireframe-ui-state.svelte';
 
   let email = $state('');
@@ -18,6 +18,11 @@
   const canSubmit = $derived(
     !!email.trim() && !!password && validateLoginForm(email, password) === null
   );
+
+  const footerLinks = [
+    { label: 'Create account', href: moduleTabPath('auth', 'sign-up') },
+    { label: 'Forgot password?', href: moduleTabPath('auth', 'forgot-password') }
+  ];
 
   function handleSubmit(event: Event) {
     event.preventDefault();
@@ -36,52 +41,57 @@
   }
 </script>
 
-<div data-testid={selectors.authLoginPanel}>
-  <WireframePage title="Login" subtitle="Auth milestone — reference pattern">
-    {#snippet banner()}
-      <ReferenceMockBanner />
-    {/snippet}
-    <WireframeSection title="Credentials">
-      <form onsubmit={handleSubmit}>
-        <LowFiField
-          id="login-email"
-          label="Email"
-          type="email"
-          bind:value={email}
-          error={fieldError && !email.trim() ? fieldError : null}
-          testId={selectors.authLoginEmail}
-        />
-        <LowFiField
-          id="login-password"
-          label="Password"
-          type="password"
-          bind:value={password}
-          error={fieldError && email.trim() && !password ? fieldError : null}
-          testId={selectors.authLoginPassword}
-        />
-        {#if submitError}
-          <div class="submit-error" data-testid={selectors.authLoginError}>
-            <ErrorState title="Sign in failed" message={submitError} />
-          </div>
-        {/if}
-        <LowFiButton type="submit" disabled={!canSubmit} testId={selectors.authLoginSubmit}>
-          Sign in
-        </LowFiButton>
-      </form>
-      <p class="hint">
-        Demo: <code>{MOCK_VALID_EMAIL}</code> / <code>{MOCK_VALID_PASSWORD}</code>
-      </p>
-    </WireframeSection>
-  </WireframePage>
-</div>
+<AuthHiFiShell panelTestId={selectors.authLoginPanel} {footerLinks}>
+  <AuthPageHeader title="Login" subtitle="Auth milestone — reference pattern" sectionTitle="Credentials" />
+  <form onsubmit={handleSubmit}>
+    <HiFiField
+      id="login-email"
+      label="Email"
+      type="email"
+      bind:value={email}
+      error={fieldError && !email.trim() ? fieldError : null}
+      testId={selectors.authLoginEmail}
+    />
+    <HiFiField
+      id="login-password"
+      label="Password"
+      type="password"
+      bind:value={password}
+      error={fieldError && email.trim() && !password ? fieldError : null}
+      testId={selectors.authLoginPassword}
+    />
+    {#if submitError}
+      <div class="submit-error" data-testid={selectors.authLoginError}>
+        <ErrorState title="Sign in failed" message={submitError} />
+      </div>
+    {/if}
+    <HiFiButton type="submit" disabled={!canSubmit} testId={selectors.authLoginSubmit}>
+      Sign in
+    </HiFiButton>
+  </form>
+  <p class="hint">
+    Demo: <code>{MOCK_VALID_EMAIL}</code> / <code>{MOCK_VALID_PASSWORD}</code>
+  </p>
+</AuthHiFiShell>
 
 <style>
   .hint {
-    margin-top: 1rem;
+    margin: 1rem 0 0;
+    font-size: 0.8125rem;
+    color: var(--auth-muted, #64748b);
+  }
+  .hint code {
     font-size: 0.75rem;
-    color: #71717a;
+    padding: 0.125rem 0.375rem;
+    background: var(--auth-primary-soft, #dbeafe);
+    border-radius: 4px;
+    color: var(--auth-text, #0f172a);
   }
   .submit-error {
     margin-bottom: 0.75rem;
+  }
+  .submit-error :global(.error-state) {
+    border-color: var(--auth-danger, #dc2626);
+    background: var(--auth-danger-soft, #fef2f2);
   }
 </style>
