@@ -35,6 +35,8 @@ export async function clickModuleTab(page: Page, tabId: string): Promise<void> {
 }
 
 export async function resetWireframeSession(page: Page): Promise<void> {
+  await page.goto('/auth/login');
+  await page.waitForLoadState('domcontentloaded');
   await page.evaluate(() => {
     localStorage.clear();
     sessionStorage.clear();

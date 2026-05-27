@@ -12,7 +12,9 @@ describe('validateSignUpForm', () => {
   });
 
   it('rejects invalid email and password mismatch', () => {
-    expect(validateSignUpForm('Jane Doe', '', 'secret1', 'secret1', true)).toBe('Email is required');
+    expect(validateSignUpForm('Jane Doe', '', 'secret1', 'secret1', true)).toBe(
+      'Email is required'
+    );
     expect(validateSignUpForm('Jane Doe', 'bad', 'secret1', 'secret1', true)).toBe(
       'Enter a valid email address'
     );

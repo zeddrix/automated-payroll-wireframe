@@ -10,20 +10,36 @@ import {
   waitForPageLoad
 } from '../fixtures/test-helpers';
 
-test.describe('Navigation contract', () => {
-  test('mobile: bottom nav payroll then approval tab updates route', async ({ page }) => {
+test.describe('Wireframe shell and navigation', () => {
+  test('bootstrap redirect then sidebar navigation to employees', async ({ page }) => {
+    await setDesktopViewport(page);
+    await page.goto('/');
+    await waitForPageLoad(page);
+    await expect(page).toHaveURL(/\/auth\/login/);
+    await expect(page.locator(`[data-testid="${selectors.authLoginPanel}"]`)).toBeVisible();
+    await expect(page.locator(`[data-testid="${selectors.appHeader}"]`)).toBeVisible();
+    await expect(page.locator(`[data-testid="${selectors.authStatusBadge}"]`)).toContainText(
+      'Signed out'
+    );
+
+    await clickSidebar(page, 'employees');
+    await expect(page).toHaveURL(/\/employees\/directory/);
+    await expect(
+      page.locator(`[data-testid="${selectors.employeesDirectoryPanel}"]`)
+    ).toBeVisible();
+  });
+
+  test('mobile bottom nav payroll run-preview then approval panel', async ({ page }) => {
     await setMobileViewport(page);
     await gotoModuleTab(page, 'auth', 'login');
     await clickBottomNav(page, 'payroll');
     await expect(page).toHaveURL(/\/payroll\/run-preview/);
     await clickModuleTab(page, 'approval');
     await expect(page).toHaveURL(/\/payroll\/approval/);
-    await expect(page.locator(`[data-testid="${selectors.moduleTab('approval')}"]`)).toHaveClass(
-      /active/
-    );
+    await expect(page.locator(`[data-testid="${selectors.payrollApprovalPanel}"]`)).toBeVisible();
   });
 
-  test('desktop: sidebar attendance then daily log shows placeholder panel', async ({ page }) => {
+  test('desktop sidebar attendance then daily log shows placeholder panel', async ({ page }) => {
     await setDesktopViewport(page);
     await gotoModuleTab(page, 'auth', 'login');
     await clickSidebar(page, 'attendance');
@@ -33,7 +49,7 @@ test.describe('Navigation contract', () => {
     ).toBeVisible();
   });
 
-  test('module tabs stay active across employees directory to profile', async ({ page }) => {
+  test('employees directory profile onboarding tab tour', async ({ page }) => {
     await setDesktopViewport(page);
     await gotoModuleTab(page, 'employees', 'directory');
     await clickModuleTab(page, 'profile');
