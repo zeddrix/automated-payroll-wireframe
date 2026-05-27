@@ -2,16 +2,17 @@
   interface Props {
     title: string;
     subtitle?: string;
+    subtitleTestId?: string;
     sectionTitle?: string;
   }
 
-  let { title, subtitle, sectionTitle }: Props = $props();
+  let { title, subtitle, subtitleTestId, sectionTitle }: Props = $props();
 </script>
 
 <header class="auth-header">
   <h1 class="auth-header__title">{title}</h1>
   {#if subtitle}
-    <p class="auth-header__subtitle">{subtitle}</p>
+    <p class="auth-header__subtitle" data-testid={subtitleTestId}>{subtitle}</p>
   {/if}
   {#if sectionTitle}
     <p class="auth-header__section">{sectionTitle}</p>
