@@ -1,4 +1,10 @@
-/** In-app viewport preview for wireframe demos — not production responsive logic */
+/**
+ * In-app viewport preview for wireframe demos — not production responsive logic.
+ *
+ * Preview mode constrains the device frame and drives container-query layout inside
+ * `wireframe-screen`. Shell chrome (sidebar vs bottom nav) still follows the browser
+ * viewport width via WireframeShell @media rules.
+ */
 
 export type ViewportPreview = 'system' | 'mobile' | 'tablet' | 'desktop';
 

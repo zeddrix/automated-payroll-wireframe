@@ -46,7 +46,7 @@
         bind:value={password}
       />
 
-      <div class="row">
+      <div class="row ui-kit-button-row">
         <Button
           variant="primary"
           disabled={false}
@@ -158,10 +158,5 @@
     margin: 0 0 1rem;
     font-size: 0.875rem;
     color: var(--auth-muted, #64748b);
-  }
-  @media (min-width: 768px) {
-    .row {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
   }
 </style>

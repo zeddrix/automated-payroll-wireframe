@@ -20,6 +20,7 @@ export const selectors = {
   errorState: 'error-state',
 
   authLoginPanel: 'auth-login-panel',
+  authLoginCard: 'auth-login-card',
   authLoginEmail: 'auth-login-email',
   authLoginPassword: 'auth-login-password',
   authLoginSubmit: 'auth-login-submit',
@@ -84,6 +85,7 @@ export const selectors = {
   uiKitTokensSection: 'ui-kit-tokens-section',
   uiKitComponentsSection: 'ui-kit-components-section',
   uiKitNavigationSection: 'ui-kit-navigation-section',
+  uiKitResponsiveSection: 'ui-kit-responsive-section',
   uiKitButtonPrimary: 'ui-kit-button-primary',
   uiKitButtonGhost: 'ui-kit-button-ghost',
   uiKitButtonDisabled: 'ui-kit-button-disabled',

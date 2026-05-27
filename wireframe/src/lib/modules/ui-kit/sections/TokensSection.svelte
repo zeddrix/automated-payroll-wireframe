@@ -21,7 +21,7 @@
 
 <div data-testid={selectors.uiKitTokensSection}>
   <WireframeSection title="Color tokens">
-    <div class="grid">
+    <div class="grid ui-kit-responsive-grid">
       {#each colorGroups as group (group.title)}
         <div class="card">
           <div class="card__title">{group.title}</div>
@@ -63,7 +63,7 @@
   </WireframeSection>
 
   <WireframeSection title="Radius & shadow">
-    <div class="grid">
+    <div class="grid ui-kit-responsive-grid">
       {#each radiusGroups as group (group.title)}
         <div class="card">
           <div class="card__title">{group.title}</div>
@@ -181,10 +181,5 @@
   }
   .type-row__sample {
     color: #18181b;
-  }
-  @media (min-width: 768px) {
-    .grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
   }
 </style>

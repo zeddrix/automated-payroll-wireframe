@@ -12,11 +12,12 @@
 
   interface Props {
     panelTestId?: string;
+    cardTestId?: string;
     children: Snippet;
     footerLinks?: FooterLink[];
   }
 
-  let { panelTestId, children, footerLinks = [] }: Props = $props();
+  let { panelTestId, cardTestId, children, footerLinks = [] }: Props = $props();
 </script>
 
 <div class="auth-shell" data-testid={panelTestId}>
@@ -27,7 +28,7 @@
           <ReferenceMockBanner />
         </div>
       {/if}
-      <AuthCard>
+      <AuthCard testId={cardTestId}>
         {@render children()}
         {#if footerLinks.length > 0}
           <nav class="auth-shell__footer" aria-label="Auth navigation">
@@ -47,7 +48,7 @@
     padding: 0.5rem;
   }
   .auth-shell__backdrop {
-    padding: 1rem 0.5rem 1.5rem;
+    padding: 1rem var(--space-page-x, 0.75rem) 1.5rem;
     background: linear-gradient(
       165deg,
       var(--auth-page-gradient-start, #eff6ff) 0%,
@@ -57,7 +58,7 @@
     min-height: 12rem;
   }
   .auth-shell__inner {
-    max-width: 36rem;
+    max-width: min(100%, var(--content-max-auth-shell, 32rem));
     margin: 0 auto;
   }
   .auth-shell__banner :global(.banner) {

@@ -60,7 +60,11 @@
   }
 </script>
 
-<AuthShell panelTestId={selectors.authLoginPanel} {footerLinks}>
+<AuthShell
+  panelTestId={selectors.authLoginPanel}
+  cardTestId={selectors.authLoginCard}
+  {footerLinks}
+>
   <AuthPageHeader
     title="Login"
     subtitle={loginSubtitle}

@@ -22,7 +22,7 @@
 
 <div data-testid={selectors.uiKitNavigationSection}>
   <WireframeSection title="Sidebar rail & bottom nav">
-    <div class="nav-grid">
+    <div class="nav-grid ui-kit-nav-grid">
       <div class="nav-grid__cell">
         <div class="specimen__label">SidebarRail (static)</div>
         <div class="specimen specimen--sidebar">
@@ -139,10 +139,5 @@
     border: 2px solid #d4d4d8;
     background: transparent;
     color: #18181b;
-  }
-  @media (min-width: 768px) {
-    .nav-grid {
-      grid-template-columns: 1fr 1fr;
-    }
   }
 </style>
