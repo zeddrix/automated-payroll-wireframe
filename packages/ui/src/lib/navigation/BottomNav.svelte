@@ -35,23 +35,23 @@
     justify-content: space-around;
     gap: 0.25rem;
     padding: 0.5rem 0.75rem;
-    border-top: 2px solid #d4d4d8;
-    background: #fff;
+    border-top: 1px solid var(--auth-border, #e2e8f0);
+    background: var(--auth-surface, #ffffff);
   }
   .bottom-nav__item {
     flex: 1;
     text-align: center;
     padding: 0.5rem 0.25rem;
     font-size: 0.75rem;
-    color: #71717a;
+    color: var(--auth-muted, #64748b);
     text-decoration: none;
-    border-radius: 4px;
-    border: 1px dashed transparent;
+    border-radius: var(--auth-radius-sm, 6px);
+    border: 1px solid transparent;
   }
   .bottom-nav__item.active {
-    color: #18181b;
+    color: var(--auth-primary, #2563eb);
     font-weight: 600;
-    border-color: #a1a1aa;
-    background: #f4f4f5;
+    border-color: var(--auth-border-focus, #93c5fd);
+    background: var(--auth-primary-soft, #dbeafe);
   }
 </style>

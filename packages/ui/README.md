@@ -1,20 +1,18 @@
 # @aps/ui
 
-Low-fidelity wireframe components for the automated payroll system. Grayscale, dashed borders, proposal-stage styling.
+Production-grade wireframe UI components for the automated payroll system. Blue theme tokens, polished forms, and proposal-stage patterns.
 
 ## Usage (wireframe app)
 
 ```svelte
 <script>
-  import { WireframePage, LowFiField, LowFiButton, EmptyState } from '@aps/ui';
+  import { WireframePage, Field, Button, EmptyState } from '@aps/ui';
   import { selectors } from '@aps/contracts';
 </script>
 
 <WireframePage title="Login" subtitle="Reference / mock only">
-  <LowFiField id="email" label="Email" bind:value={email} testId={selectors.authLoginEmail} />
-  <LowFiButton type="submit" disabled={!canSubmit} testId={selectors.authLoginSubmit}>
-    Sign in
-  </LowFiButton>
+  <Field id="email" label="Email" bind:value={email} testId={selectors.authLoginEmail} />
+  <Button type="submit" disabled={!canSubmit} testId={selectors.authLoginSubmit}>Sign in</Button>
 </WireframePage>
 ```
 
@@ -30,4 +28,4 @@ These primitives can inform the production app in the sibling repo `~/Documents/
 
 ## UI Kit reference in wireframe app
 
-You can browse the integrated specimen catalog at `/ui-kit/tokens` in the wireframe app. It includes token swatches, low-fi and hi-fi component examples, and navigation patterns.
+You can browse the integrated specimen catalog at `/ui-kit/tokens` in the wireframe app. It includes token swatches, component specimens, and navigation patterns.

@@ -47,19 +47,22 @@
   }
   .table th,
   .table td {
-    border: 1px solid #d4d4d8;
-    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--auth-border, #e2e8f0);
+    padding: 0.625rem 0.75rem;
     text-align: left;
   }
   .table th {
-    background: #f4f4f5;
+    background: var(--auth-primary-soft, #dbeafe);
     font-weight: 600;
-    color: #52525b;
+    color: var(--auth-text, #0f172a);
+  }
+  .table td {
+    color: var(--auth-text, #0f172a);
   }
   tr.clickable {
     cursor: pointer;
   }
   tr.clickable:hover td {
-    background: #fafafa;
+    background: var(--auth-primary-soft, #dbeafe);
   }
 </style>

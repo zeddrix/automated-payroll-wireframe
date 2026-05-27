@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { selectors } from '@aps/contracts';
-  import LowFiButton from '../forms/LowFiButton.svelte';
+  import Button from '../forms/Button.svelte';
 
   interface Props {
     open: boolean;
@@ -29,14 +29,14 @@
     >
       <header class="modal__header">
         <h2 id="modal-title" class="modal__title">{title}</h2>
-        <LowFiButton
+        <Button
           variant="ghost"
           disabled={false}
           testId={selectors.adminModalClose}
           onclick={() => onclose?.()}
         >
           Close
-        </LowFiButton>
+        </Button>
       </header>
       <div class="modal__body">
         {@render children()}
@@ -60,10 +60,11 @@
     width: min(100%, 32rem);
     max-height: 90vh;
     overflow: auto;
-    background: #fff;
-    border: 2px solid #52525b;
-    border-radius: 8px;
-    padding: 1rem;
+    background: var(--auth-surface, #ffffff);
+    border: 1px solid var(--auth-border, #e2e8f0);
+    border-radius: var(--auth-radius-md, 10px);
+    padding: 1.25rem;
+    box-shadow: var(--auth-shadow-card, 0 4px 24px rgba(37, 99, 235, 0.08));
   }
   .modal__header {
     display: flex;
@@ -71,10 +72,13 @@
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--auth-border, #e2e8f0);
   }
   .modal__title {
     margin: 0;
     font-size: 1rem;
     font-weight: 700;
+    color: var(--auth-text, #0f172a);
   }
 </style>
