@@ -12,7 +12,8 @@
     }
   },
   "dependencies": {
-    "@aps/contracts": "workspace:*"
+    "@aps/contracts": "workspace:*",
+    "@aps/mock-data": "workspace:*"
   },
   "peerDependencies": {
     "svelte": "^5.0.0"

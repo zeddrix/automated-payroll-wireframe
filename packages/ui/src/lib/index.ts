@@ -9,6 +9,8 @@ export { default as LowFiField } from './forms/LowFiField.svelte';
 export { default as LowFiButton } from './forms/LowFiButton.svelte';
 export { default as HiFiField } from './forms/HiFiField.svelte';
 export { default as HiFiButton } from './forms/HiFiButton.svelte';
+export { default as PasswordRequirements } from './forms/PasswordRequirements.svelte';
+export { default as PasswordMatchHint } from './forms/PasswordMatchHint.svelte';
 export { default as AuthCard } from './layout/AuthCard.svelte';
 export { default as AuthPageHeader } from './layout/AuthPageHeader.svelte';
 export { default as LowFiModal } from './modals/LowFiModal.svelte';
