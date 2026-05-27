@@ -9,19 +9,21 @@ import {
 } from '@aps/contracts';
 
 describe('contracts/modules', () => {
-  it('defines five payroll wireframe modules', () => {
-    expect(MODULES).toHaveLength(5);
+  it('defines six payroll wireframe modules', () => {
+    expect(MODULES).toHaveLength(6);
     expect(MODULES.map((m) => m.id)).toEqual([
       'auth',
       'admin',
       'employees',
       'attendance',
-      'payroll'
+      'payroll',
+      'ui-kit'
     ]);
   });
 
   it('builds module tab paths', () => {
     expect(moduleTabPath('payroll', 'approval')).toBe('/payroll/approval');
+    expect(moduleTabPath('ui-kit', 'tokens')).toBe('/ui-kit/tokens');
     expect(defaultModuleTabPath('auth')).toBe('/auth/login');
   });
 
@@ -30,6 +32,7 @@ describe('contracts/modules', () => {
     expect(isModuleId('invalid')).toBe(false);
     expect(isTabIdForModule('admin', 'overview')).toBe(true);
     expect(isTabIdForModule('admin', 'login')).toBe(false);
+    expect(isTabIdForModule('ui-kit', 'tokens')).toBe(true);
     expect(getModule('employees').tabs).toHaveLength(3);
   });
 });

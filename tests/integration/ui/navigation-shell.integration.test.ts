@@ -15,7 +15,8 @@ describe('navigation shell data contract', () => {
       { id: 'admin', href: '/admin/overview' },
       { id: 'employees', href: '/employees/directory' },
       { id: 'attendance', href: '/attendance/daily-log' },
-      { id: 'payroll', href: '/payroll/run-preview' }
+      { id: 'payroll', href: '/payroll/run-preview' },
+      { id: 'ui-kit', href: '/ui-kit/tokens' }
     ]);
   });
 

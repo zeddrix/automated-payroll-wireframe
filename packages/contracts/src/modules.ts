@@ -1,4 +1,4 @@
-export type ModuleId = 'auth' | 'admin' | 'employees' | 'attendance' | 'payroll';
+export type ModuleId = 'auth' | 'admin' | 'employees' | 'attendance' | 'payroll' | 'ui-kit';
 
 export type TabId =
   | 'login'
@@ -15,7 +15,12 @@ export type TabId =
   | 'import-review'
   | 'run-preview'
   | 'adjustments'
-  | 'approval';
+  | 'approval'
+  | 'tokens'
+  | 'low-fi'
+  | 'hi-fi'
+  | 'navigation'
+  | 'catalog';
 
 export interface ModuleTabDefinition {
   id: TabId;
@@ -78,6 +83,18 @@ export const MODULES: ModuleDefinition[] = [
       { id: 'run-preview', label: 'Run Preview' },
       { id: 'adjustments', label: 'Adjustments' },
       { id: 'approval', label: 'Approval' }
+    ]
+  },
+  {
+    id: 'ui-kit',
+    label: 'UI Kit',
+    defaultTab: 'tokens',
+    tabs: [
+      { id: 'tokens', label: 'Tokens' },
+      { id: 'low-fi', label: 'Low-fi' },
+      { id: 'hi-fi', label: 'Hi-fi' },
+      { id: 'navigation', label: 'Navigation' },
+      { id: 'catalog', label: 'Catalog' }
     ]
   }
 ];

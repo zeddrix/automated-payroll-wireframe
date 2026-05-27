@@ -77,6 +77,18 @@ export const selectors = {
   attendanceDailyLogPanel: 'attendance-daily-log-panel',
   employeesDirectoryPanel: 'employees-directory-panel',
   payrollApprovalPanel: 'payroll-approval-panel',
+  uiKitPanel: 'ui-kit-panel',
+  uiKitLayoutToggle: 'ui-kit-layout-toggle',
+  uiKitLayoutTabs: 'ui-kit-layout-tabs',
+  uiKitLayoutScroll: 'ui-kit-layout-scroll',
+  uiKitTokensSection: 'ui-kit-tokens-section',
+  uiKitLowFiSection: 'ui-kit-low-fi-section',
+  uiKitHiFiSection: 'ui-kit-hi-fi-section',
+  uiKitNavigationSection: 'ui-kit-navigation-section',
+  uiKitButtonPrimary: 'ui-kit-button-primary',
+  uiKitButtonGhost: 'ui-kit-button-ghost',
+  uiKitButtonDisabled: 'ui-kit-button-disabled',
+  uiKitColorSwatch: (name: string) => `ui-kit-swatch-${name}`,
 
   wireframePlaceholder: 'wireframe-placeholder',
   referenceMockBanner: 'reference-mock-banner'
