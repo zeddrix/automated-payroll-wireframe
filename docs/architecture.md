@@ -1,0 +1,43 @@
+# Architecture — Wireframe Repository
+
+## Purpose
+
+This repo exists only for **proposal-stage wireframes** for an automated payroll system (auth, admin, employees, attendance, payroll).
+
+| Piece                | Role                                                                                |
+| -------------------- | ----------------------------------------------------------------------------------- |
+| `wireframe/`         | Runnable low-fi app to preview flows and assemble external designs (e.g. Corsair U) |
+| `packages/ui`        | Reusable low-fi Svelte components                                                   |
+| `packages/contracts` | Module/tab registry and stable `data-testid` selectors                              |
+| `packages/mock-data` | Deterministic fixtures — not business truth                                         |
+
+There is **no** production backend, real auth, or payroll business logic here.
+
+## Production application (separate repository)
+
+The real product is developed in **`~/Documents/automated-payroll-system`** (sibling folder). That repo:
+
+- Owns API clients, adapters, and real user flows
+- Keeps payroll calculations in the backend — not in the UI
+- May copy UI patterns from this wireframe repo manually until a shared design system is justified
+
+## Wireframe vs production
+
+|         | This repo (wireframe)                     | `automated-payroll-system` |
+| ------- | ----------------------------------------- | -------------------------- |
+| Purpose | Flow alignment, demos, component patterns | Real users, real data      |
+| Data    | `@aps/mock-data`                          | Backend API / DB           |
+| Auth    | Mock toggle in `wireframe-ui-state`       | Real auth service          |
+| Logic   | Presentation only                         | Business rules in backend  |
+
+## Package reuse rules (within this repo)
+
+- **Do** keep generic low-fi primitives in `packages/ui`.
+- **Do not** put wireframe-only labels or mock banners inside `packages/ui` — keep those in `wireframe/`.
+
+## Testing layout
+
+- E2E: Playwright against `wireframe/` (port 4570).
+- Unit / integration: Vitest at repo root under `tests/`.
+
+Conventions are adapted from the **queue** codebase; see [CLAUDE.md](../CLAUDE.md) and [docs/e2e-testing-rules.md](e2e-testing-rules.md).

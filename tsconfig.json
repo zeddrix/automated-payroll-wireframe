@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@aps/contracts": ["./packages/contracts/src/index.ts"],
+      "@aps/mock-data": ["./packages/mock-data/src/index.ts"],
+      "@aps/ui": ["./packages/ui/src/lib/index.ts"]
+    }
+  },
+  "include": ["tests/**/*.ts", "playwright.config.ts", "vitest.config.ts"]
+}

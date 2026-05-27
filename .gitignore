@@ -1,0 +1,12 @@
+node_modules
+.pnpm-store
+pnpm-lock.yaml
+.svelte-kit
+build
+dist
+.env
+.env.*
+!.env.example
+test-results
+playwright-report
+node_modules/.cache

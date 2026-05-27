@@ -1,0 +1,26 @@
+{
+  "name": "wireframe",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview",
+    "sync": "svelte-kit sync"
+  },
+  "dependencies": {
+    "@aps/contracts": "workspace:*",
+    "@aps/mock-data": "workspace:*",
+    "@aps/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-auto": "^6.0.0",
+    "@sveltejs/kit": "^2.21.0",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "svelte": "^5.30.2",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  }
+}
