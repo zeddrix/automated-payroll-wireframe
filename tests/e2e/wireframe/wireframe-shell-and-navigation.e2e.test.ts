@@ -5,6 +5,7 @@ import {
   clickModuleTab,
   clickSidebar,
   gotoModuleTab,
+  resetWireframeSession,
   setDesktopViewport,
   setMobileViewport,
   waitForPageLoad
@@ -47,6 +48,29 @@ test.describe('Wireframe shell and navigation', () => {
     await expect(
       page.locator(`[data-testid="${selectors.attendanceDailyLogPanel}"]`)
     ).toBeVisible();
+  });
+
+  test('shell header never shows lo-fi or hi-fi language', async ({ page }) => {
+    await resetWireframeSession(page);
+    await setDesktopViewport(page);
+    await gotoModuleTab(page, 'auth', 'login');
+    const phase = page.locator('.shell__phase');
+    await expect(phase).toBeVisible();
+    await expect(phase).not.toContainText(/lo-?fi/i);
+    await expect(phase).not.toContainText(/hi-?fi/i);
+    await clickSidebar(page, 'admin');
+    await expect(page).toHaveURL(/\/admin\/overview/);
+    await expect(phase).not.toContainText(/lo-?fi/i);
+    await expect(phase).not.toContainText(/hi-?fi/i);
+  });
+
+  test('admin roles tab navigates to placeholder panel', async ({ page }) => {
+    await resetWireframeSession(page);
+    await setDesktopViewport(page);
+    await gotoModuleTab(page, 'admin', 'overview');
+    await clickModuleTab(page, 'roles');
+    await expect(page).toHaveURL(/\/admin\/roles/);
+    await expect(page.locator(`[data-testid="${selectors.wireframePlaceholder}"]`)).toBeVisible();
   });
 
   test('employees directory profile onboarding tab tour', async ({ page }) => {

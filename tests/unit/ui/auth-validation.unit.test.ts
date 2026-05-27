@@ -6,7 +6,7 @@ import {
   MOCK_VALID_PASSWORD
 } from '@aps/mock-data';
 
-describe('mock auth validation (used by LowFi forms)', () => {
+describe('mock auth validation', () => {
   it('rejects empty and invalid email', () => {
     expect(validateLoginForm('', 'password')).toBe('Email is required');
     expect(validateLoginForm('not-an-email', 'password123')).toBe('Enter a valid email address');

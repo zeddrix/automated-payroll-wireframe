@@ -27,6 +27,15 @@ describe('contracts/modules', () => {
     expect(defaultModuleTabPath('auth')).toBe('/auth/login');
   });
 
+  it('ui-kit exposes components tab without legacy low or hi fi tab ids', () => {
+    const uiKit = getModule('ui-kit');
+    const tabIds = uiKit.tabs.map((t) => t.id);
+    expect(tabIds).toEqual(['tokens', 'components', 'navigation', 'catalog']);
+    expect(isTabIdForModule('ui-kit', 'components')).toBe(true);
+    expect(tabIds).not.toContain('low-fi');
+    expect(tabIds).not.toContain('hi-fi');
+  });
+
   it('validates module and tab ids', () => {
     expect(isModuleId('admin')).toBe(true);
     expect(isModuleId('invalid')).toBe(false);

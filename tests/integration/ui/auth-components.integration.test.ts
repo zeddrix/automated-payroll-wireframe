@@ -4,19 +4,19 @@
 import { describe, expect, it } from 'vitest';
 import { render } from '@testing-library/svelte';
 import {
-  hifiBlue,
+  blueTheme,
   DevicePreviewFrame,
   DevicePreviewTabbar,
-  HiFiField,
+  Field,
   PasswordRequirements
 } from '@aps/ui';
 import { resolveModuleView } from '../../../wireframe/src/lib/shell/module-view-registry';
 import PlaceholderView from '../../../wireframe/src/lib/modules/shared/PlaceholderView.svelte';
 
-describe('HiFi auth and device preview wiring', () => {
+describe('auth components and device preview wiring', () => {
   it('exports blue theme tokens and device preview components', () => {
-    expect(hifiBlue.colors.primary).toBe('#2563eb');
-    expect(hifiBlue.colors.primarySoft).toBe('#dbeafe');
+    expect(blueTheme.colors.primary).toBe('#2563eb');
+    expect(blueTheme.colors.primarySoft).toBe('#dbeafe');
     expect(DevicePreviewFrame).toBeTruthy();
     expect(DevicePreviewTabbar).toBeTruthy();
   });
@@ -29,8 +29,8 @@ describe('HiFi auth and device preview wiring', () => {
     }
   });
 
-  it('HiFiField sets aria-invalid and aria-describedby when error is shown', () => {
-    const { getByTestId } = render(HiFiField, {
+  it('Field sets aria-invalid and aria-describedby when error is shown', () => {
+    const { getByTestId } = render(Field, {
       props: {
         id: 'test-email',
         label: 'Email',
@@ -43,8 +43,8 @@ describe('HiFi auth and device preview wiring', () => {
     expect(input.getAttribute('aria-describedby')).toBe('test-email-error');
   });
 
-  it('HiFiField password toggle switches input type and preserves value', async () => {
-    const { getByTestId } = render(HiFiField, {
+  it('Field password toggle switches input type and preserves value', async () => {
+    const { getByTestId } = render(Field, {
       props: {
         id: 'test-password',
         label: 'Password',
