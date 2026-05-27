@@ -2,6 +2,7 @@
   import { getSignUpFieldErrors, isSignUpSubmittable } from '@aps/mock-data';
   import { moduleTabPath, selectors } from '@aps/contracts';
   import { AuthPageHeader, Field, Button, PasswordRequirements, PasswordMatchHint } from '@aps/ui';
+  import { appPath } from '../../app-path';
   import AuthShell from './AuthShell.svelte';
   import { demoLook } from '../../state/wireframe-demo-look.svelte';
 
@@ -33,7 +34,7 @@
   const footerLinks = [
     {
       label: 'Already have an account? Sign in',
-      href: moduleTabPath('auth', 'login'),
+      href: appPath(moduleTabPath('auth', 'login')),
       testId: selectors.authFooterLinkLogin
     }
   ];
@@ -65,12 +66,12 @@
         <p class="success__title">Account created (demo)</p>
         <p class="success__message">
           This is a wireframe preview. No account was stored. You can continue to
-          <a href={moduleTabPath('auth', 'login')}>sign in</a> with demo credentials.
+          <a href={appPath(moduleTabPath('auth', 'login'))}>sign in</a> with demo credentials.
         </p>
       {:else}
         <p class="success__title">Account created</p>
         <p class="success__message">
-          You can <a href={moduleTabPath('auth', 'login')}>sign in</a> with your new account.
+          You can <a href={appPath(moduleTabPath('auth', 'login'))}>sign in</a> with your new account.
         </p>
       {/if}
     </div>

@@ -8,6 +8,7 @@
   } from '@aps/mock-data';
   import { moduleTabPath, selectors } from '@aps/contracts';
   import { AuthPageHeader, Field, Button, ErrorState } from '@aps/ui';
+  import { appPath } from '../../app-path';
   import AuthShell from './AuthShell.svelte';
   import DemoCopy from '../shared/DemoCopy.svelte';
   import { wireframeUiState } from '../../state/wireframe-ui-state.svelte';
@@ -25,12 +26,12 @@
   const footerLinks = [
     {
       label: 'Create account',
-      href: moduleTabPath('auth', 'sign-up'),
+      href: appPath(moduleTabPath('auth', 'sign-up')),
       testId: selectors.authFooterLinkSignUp
     },
     {
       label: 'Forgot password?',
-      href: moduleTabPath('auth', 'forgot-password'),
+      href: appPath(moduleTabPath('auth', 'forgot-password')),
       testId: selectors.authFooterLinkForgot
     }
   ];

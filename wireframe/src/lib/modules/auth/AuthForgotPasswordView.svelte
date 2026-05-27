@@ -2,6 +2,7 @@
   import { getForgotPasswordFieldErrors, isForgotPasswordSubmittable } from '@aps/mock-data';
   import { moduleTabPath, selectors } from '@aps/contracts';
   import { AuthPageHeader, Field, Button } from '@aps/ui';
+  import { appPath } from '../../app-path';
   import AuthShell from './AuthShell.svelte';
   import { demoLook } from '../../state/wireframe-demo-look.svelte';
 
@@ -16,7 +17,7 @@
   const footerLinks = [
     {
       label: 'Back to login',
-      href: moduleTabPath('auth', 'login'),
+      href: appPath(moduleTabPath('auth', 'login')),
       testId: selectors.authFooterLinkLogin
     }
   ];
@@ -45,13 +46,13 @@
         <p class="success__title">Reset link sent (demo)</p>
         <p class="success__message">
           Check your inbox for instructions. This wireframe does not send email.
-          <a href={moduleTabPath('auth', 'login')}>Return to login</a>
+          <a href={appPath(moduleTabPath('auth', 'login'))}>Return to login</a>
         </p>
       {:else}
         <p class="success__title">Reset link sent</p>
         <p class="success__message">
           Check your inbox for instructions.
-          <a href={moduleTabPath('auth', 'login')}>Return to login</a>
+          <a href={appPath(moduleTabPath('auth', 'login'))}>Return to login</a>
         </p>
       {/if}
     </div>
