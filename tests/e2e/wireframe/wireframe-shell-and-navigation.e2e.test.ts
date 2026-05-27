@@ -4,6 +4,7 @@ import {
   clickBottomNav,
   clickModuleTab,
   clickSidebar,
+  getElementBox,
   gotoModuleTab,
   resetWireframeSession,
   setDesktopViewport,
@@ -28,6 +29,18 @@ test.describe('Wireframe shell and navigation', () => {
     await expect(
       page.locator(`[data-testid="${selectors.employeesDirectoryPanel}"]`)
     ).toBeVisible();
+  });
+
+  test('mobile viewport login card uses narrow layout', async ({ page }) => {
+    await setMobileViewport(page);
+    await gotoModuleTab(page, 'auth', 'login');
+    await expect(page.locator(`[data-testid="${selectors.authLoginPanel}"]`)).toBeVisible();
+
+    const card = await getElementBox(page, selectors.authLoginCard);
+    expect(card.width).toBeLessThanOrEqual(390);
+
+    await expect(page.locator(`[data-testid="${selectors.bottomNav}"]`)).toBeVisible();
+    await expect(page.locator(`[data-testid="${selectors.sidebarRail}"]`)).toBeHidden();
   });
 
   test('mobile bottom nav payroll run-preview then approval panel', async ({ page }) => {

@@ -5,7 +5,8 @@ import {
   clickSidebar,
   gotoModuleTab,
   resetWireframeSession,
-  setDesktopViewport
+  setDesktopViewport,
+  setMobileViewport
 } from '../fixtures/test-helpers';
 
 test.describe('UI Kit module', () => {
@@ -72,6 +73,43 @@ test.describe('UI Kit module', () => {
       'aria-checked',
       'true'
     );
+  });
+
+  test('mobile viewport components button row stacks', async ({ page }) => {
+    await setMobileViewport(page);
+    await gotoModuleTab(page, 'ui-kit', 'components');
+    await page.locator(`[data-testid="${selectors.uiKitButtonPrimary}"]`).scrollIntoViewIfNeeded();
+    await page.locator(`[data-testid="${selectors.uiKitButtonPrimary}"]`).click();
+
+    const primary = await page
+      .locator(`[data-testid="${selectors.uiKitButtonPrimary}"]`)
+      .boundingBox();
+    const ghost = await page.locator(`[data-testid="${selectors.uiKitButtonGhost}"]`).boundingBox();
+    const disabled = await page
+      .locator(`[data-testid="${selectors.uiKitButtonDisabled}"]`)
+      .boundingBox();
+
+    expect(primary).not.toBeNull();
+    expect(ghost).not.toBeNull();
+    expect(disabled).not.toBeNull();
+    if (!primary || !ghost || !disabled) {
+      throw new Error('Expected button bounding boxes');
+    }
+    expect(ghost.y).toBeGreaterThan(primary.y);
+    expect(disabled.y).toBeGreaterThan(ghost.y);
+  });
+
+  test('catalog scroll mode includes responsive rules section', async ({ page }) => {
+    await gotoModuleTab(page, 'ui-kit', 'tokens');
+    await page.locator(`[data-testid="${selectors.uiKitLayoutScroll}"]`).click();
+    await expect(page).toHaveURL(/\/ui-kit\/catalog/);
+    await page
+      .locator(`[data-testid="${selectors.uiKitResponsiveSection}"]`)
+      .scrollIntoViewIfNeeded();
+    await expect(page.locator(`[data-testid="${selectors.uiKitResponsiveSection}"]`)).toBeVisible();
+    await expect(
+      page.getByText('Device preview resizes content inside the frame only')
+    ).toBeVisible();
   });
 
   test('switching back to tabbed mode returns to tokens', async ({ page }) => {
