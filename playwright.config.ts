@@ -19,13 +19,13 @@ const config: PlaywrightTestConfig = {
   retries: readEnvInt('PW_RETRIES', 0),
   workers: readEnvInt('PW_WORKERS', 1),
   webServer: {
-    command: `pnpm -C wireframe dev --port ${WIREframe_PORT} --host 127.0.0.1`,
+    command: `pnpm -C wireframe dev --port ${WIREframe_PORT} --host localhost`,
     port: WIREframe_PORT,
     reuseExistingServer: !process.env.CI && process.env.PW_DISABLE_REUSE_SERVER !== '1',
     timeout: 120000
   },
   use: {
-    baseURL: `http://127.0.0.1:${WIREframe_PORT}`,
+    baseURL: `http://localhost:${WIREframe_PORT}`,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     navigationTimeout: 45000,

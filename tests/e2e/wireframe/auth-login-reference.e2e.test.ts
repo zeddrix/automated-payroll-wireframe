@@ -36,18 +36,18 @@ test.describe('Auth login reference', () => {
     );
   });
 
-  test('switch to sign-up tab shows placeholder without losing shell', async ({ page }) => {
+  test('switch to sign-up tab shows hi-fi sign-up panel without losing shell', async ({ page }) => {
     await page.locator(`[data-testid="${selectors.moduleTab('sign-up')}"]`).click();
     await expect(page).toHaveURL(/\/auth\/sign-up/);
     await waitForPageLoad(page);
-    await expect(page.locator(`[data-testid="${selectors.wireframePlaceholder}"]`)).toBeVisible();
+    await expect(page.locator(`[data-testid="${selectors.authSignUpPanel}"]`)).toBeVisible();
     await page.locator(`[data-testid="${selectors.moduleTab('login')}"]`).click();
     await expect(page.locator(`[data-testid="${selectors.authLoginPanel}"]`)).toBeVisible();
   });
 
-  test('forgot password tab is reachable from login module', async ({ page }) => {
+  test('forgot password tab shows hi-fi forgot panel', async ({ page }) => {
     await page.locator(`[data-testid="${selectors.moduleTab('forgot-password')}"]`).click();
     await expect(page).toHaveURL(/\/auth\/forgot-password/);
-    await expect(page.locator(`[data-testid="${selectors.wireframePlaceholder}"]`)).toBeVisible();
+    await expect(page.locator(`[data-testid="${selectors.authForgotPanel}"]`)).toBeVisible();
   });
 });
