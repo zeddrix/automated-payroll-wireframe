@@ -27,3 +27,7 @@ Low-fidelity wireframe components for the automated payroll system. Grayscale, d
 ## Future production app
 
 These primitives can inform the production app in the sibling repo `~/Documents/automated-payroll-system` once requirements exist; copy patterns or extract a shared package later. Keep APIs generic (props/slots), not wireframe-only hacks.
+
+## UI Kit reference in wireframe app
+
+You can browse the integrated specimen catalog at `/ui-kit/tokens` in the wireframe app. It includes token swatches, low-fi and hi-fi component examples, and navigation patterns.
