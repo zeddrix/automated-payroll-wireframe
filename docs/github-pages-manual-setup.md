@@ -52,6 +52,8 @@ Check the following in GitHub:
 | Workflow not listed under Pages | Confirm **Settings** → **Pages** → **Source** = **GitHub Actions**. |
 | Environment approval pending | **Settings** → **Environments** → **github-pages** → review required reviewers / approve the deployment in the Actions run. |
 | Permission errors on deploy | **Settings** → **Actions** → **General** → Workflow permissions: prefer **Read and write permissions** (or ensure `GITHUB_TOKEN` can write Pages per org policy). |
+| **Deploy Pages** fails at **Setup Node** (~12s) | `actions/setup-node` with `cache: pnpm` needs `pnpm-lock.yaml` in the repo | Ensure `pnpm-lock.yaml` is committed (not gitignored); re-run the workflow. |
+| Site shows the **README** instead of the wireframe | An old Jekyll/branch deploy is still live; **Deploy Pages** never succeeded | Fix the workflow, run **Deploy Pages** to completion, then hard-refresh the demo URL. |
 
 ## 5. If you rename the repository
 

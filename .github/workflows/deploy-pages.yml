@@ -23,8 +23,6 @@ jobs:
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 10
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -38,13 +36,10 @@ jobs:
       - name: Quality gate
         run: pnpm quality:fast
 
-      - name: Build static site
+      - name: Build static site for GitHub Pages
         env:
           BASE_PATH: /${{ github.event.repository.name }}
-        run: pnpm build
-
-      - name: Add GitHub Pages SPA fallback
-        run: cp wireframe/build/index.html wireframe/build/404.html
+        run: pnpm build:pages
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

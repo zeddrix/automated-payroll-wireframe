@@ -2,10 +2,11 @@
   "name": "automated-payroll-wireframe",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.12.1",
   "scripts": {
     "dev": "pnpm -C wireframe dev",
     "build": "pnpm -C wireframe build",
-    "build:pages": "BASE_PATH=/automated-payroll-wireframe pnpm -C wireframe build",
+    "build:pages": "BASE_PATH=${BASE_PATH:-/automated-payroll-wireframe} pnpm -C wireframe build && cp wireframe/build/index.html wireframe/build/404.html",
     "preview:pages": "BASE_PATH=/automated-payroll-wireframe pnpm -C wireframe preview",
     "sync": "pnpm -C wireframe sync",
     "check": "pnpm sync && pnpm exec svelte-check --tsconfig wireframe/tsconfig.json",
